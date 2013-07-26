@@ -1,0 +1,285 @@
+{
+    "PlantTissue": {
+        "Bark": "Plant tissue outside the vascular cambium or the xylem; in older trees may be divided into dead outer bark and living inner bark, which consists of secondary phloem.",
+        "Conduit": "A water-transporting element in a plant.",
+        "ConduitLumen": "The cavity bounded by a conduit cell wall.",
+        "LeafVascularBundle": "A unit strand of the vascular system containing the vascular tissues, xylem and phloem in a leaf.",
+        "Phloem": {
+            "comment": "A portion of vascular tissue whose principal function is conducting organic substances.",
+            "PhloemCell": {
+                "comment": "A cell of the phloem, which is a part of vascular plant tissue whose principal function is conducting organic substances.",
+                "LeafPhloemCell": ""
+            },
+            "partof": "true"
+        },
+        "comment": "Formed by grouped differentiated plant cells.",
+        "RootCambium": "A lateral meristem, the cells of which divide mostly periclinally in the root.",
+        "RootTissue": "Differentiated root cells grouped together.",
+        "ShootCambium": "A lateral meristem, the cells of which divide mostly periclinally in the shoot.",
+        "Wood": {
+            "comment": "A portion of xylem tissue that develops from a vascular cambium.",
+            "BranchWood": "The wood on a branch.",
+            "SapWood": "Outer part of the wood of stem or root containing living cells in which conduction of water takes place.",
+            "StemWood": "The wood on a stem."
+        },
+        "Xylem": {
+            "comment": "A portion of vascular tissue composed of xylem elements.",
+            "XylemCell": {
+                "comment": "Plant cells that are part of the xylem and are often long tracheary elements that transport water.",
+                "LeafXylemCell": ""
+            },
+            "partof": "true"
+        }
+    },
+    "Plant": {
+        "Bark": "Plant tissue outside the vascular cambium or the xylem; in older trees may be divided into dead outer bark and living inner bark, which consists of secondary phloem.",
+        "partof": "true",
+        "comment": "Living organisms belonging to the kingdom Plantae that obtain most of their energy from sunlight via photosynthesis.",
+        "PlantResprout": "Young plant growth, such as a bud or shoot.",
+        "PlantSapling": "A young plant.",
+        "PlantSeedling": "A young plant that has grown from a seed.",
+        "RootSystem": {
+            "comment": "Plant axes that bear no leaves and are often found below ground.",
+            "CoarseRoot": "Roots that have undergone secondary thickening and have a woody structure.",
+            "partof": "true",
+            "FineRoot": "Primary roots, usually <2 mm in diameter, that are often heavily branched, support mycorrhizas and are short lived.",
+            "RootCambium": "A lateral meristem, the cells of which divide mostly periclinally in the root.",
+            "RootTissue": "Differentiated root cells grouped together."
+        },
+        "Seed": "A propagating organ formed in the reproductive cycle of gymnosperms and angiosperms, derived from the ovule and enclosing an embryo.",
+        "ShootSystem": {
+            "comment": "A collective plant structure that produces shoot apical meristems and the plant structures that arise from them.",
+            "Canopy": "The aboveground portion of a plant or plant community formed by plant crowns.",
+            "partof": "true",
+            "Cotyledon": "A leaf formed at the first node of a sporophyte.",
+            "Fruit": {
+                "comment": "A collective plant structure containing one or more embryos, which as a whole, develops from a gynoecium.",
+                "Seed": "A propagating organ formed in the reproductive cycle of gymnosperms and angiosperms, derived from the ovule and enclosing an embryo.",
+                "partof": "true"
+            },
+            "Inflorescence": {
+                "comment": "The part of the plant axial system that bears flowers and is typically above the uppermost foliage leaves.",
+                "Flower": "A reproductive shoot system that has at least one carpel or at least one stamen and does not contain any other determinate shoot system as a part.",
+                "partof": "true"
+            },
+            "ShootCambium": "A lateral meristem, the cells of which divide mostly periclinally in the shoot.",
+            "Stem": {
+                "comment": "A shoot axis that is the primary axis of a plant.",
+                "Branch": {
+                    "comment": "A shoot axis that develops from an axillary meristem or from the shoot apical meristem.",
+                    "BranchWood": "The wood on a branch.",
+                    "partof": "true",
+                    "Twig": "A small thin terminal branch of a woody plant."
+                },
+                "partof": "true",
+                "Leaf": {
+                    "comment": "A phyllome that is not part of a flower.",
+                    "Cotyledon": "A leaf formed at the first node of a sporophyte.",
+                    "LeafBlade": "The lamina of a leaf, usually dorsiventrally flattened and expanded.",
+                    "partof": "true",
+                    "LeafEpidermisCell": "A leaf cell that constitutes leaf dermal tissue.",
+                    "LeafLaminaCell": "A cell that is part of a leaf lamina.",
+                    "LeafMesophyllCell": "A chlorenchyma cell that is part of a leaf mesophyll.",
+                    "LeafMitochondria": "Mitochondira found in a leaf.",
+                    "LeafPalisadeCell": "",
+                    "LeafPhloemCell": "",
+                    "LeafSclerenchymaCell": "",
+                    "LeafVascularBundle": "A unit strand of the vascular system containing the vascular tissues, xylem and phloem in a leaf.",
+                    "LeafXylemCell": "",
+                    "Leaflet": "A segment of a compound leaf.",
+                    "Petiole": "A stalk of a leaf."
+                },
+                "StemWood": "The wood on a stem."
+            }
+        },
+        "Wood": {
+            "comment": "A portion of xylem tissue that develops from a vascular cambium.",
+            "BranchWood": "The wood on a branch.",
+            "SapWood": "Outer part of the wood of stem or root containing living cells in which conduction of water takes place.",
+            "StemWood": "The wood on a stem."
+        }
+    },
+    "PlantOrgan": {
+        "Branch": {
+            "comment": "A shoot axis that develops from an axillary meristem or from the shoot apical meristem.",
+            "BranchWood": "The wood on a branch.",
+            "partof": "true",
+            "Twig": "A small thin terminal branch of a woody plant."
+        },
+        "Canopy": "The aboveground portion of a plant or plant community formed by plant crowns.",
+        "CoarseRoot": "Roots that have undergone secondary thickening and have a woody structure.",
+        "FineRoot": "Primary roots, usually <2 mm in diameter, that are often heavily branched, support mycorrhizas and are short lived.",
+        "Flower": "A reproductive shoot system that has at least one carpel or at least one stamen and does not contain any other determinate shoot system as a part.",
+        "Fruit": {
+            "comment": "A collective plant structure containing one or more embryos, which as a whole, develops from a gynoecium.",
+            "Seed": "A propagating organ formed in the reproductive cycle of gymnosperms and angiosperms, derived from the ovule and enclosing an embryo.",
+            "partof": "true"
+        },
+        "Inflorescence": {
+            "comment": "The part of the plant axial system that bears flowers and is typically above the uppermost foliage leaves.",
+            "Flower": "A reproductive shoot system that has at least one carpel or at least one stamen and does not contain any other determinate shoot system as a part.",
+            "partof": "true"
+        },
+        "Leaf": {
+            "comment": "A phyllome that is not part of a flower.",
+            "Cotyledon": "A leaf formed at the first node of a sporophyte.",
+            "LeafBlade": "The lamina of a leaf, usually dorsiventrally flattened and expanded.",
+            "partof": "true",
+            "LeafEpidermisCell": "A leaf cell that constitutes leaf dermal tissue.",
+            "LeafLaminaCell": "A cell that is part of a leaf lamina.",
+            "LeafMesophyllCell": "A chlorenchyma cell that is part of a leaf mesophyll.",
+            "LeafMitochondria": "Mitochondira found in a leaf.",
+            "LeafPalisadeCell": "",
+            "LeafPhloemCell": "",
+            "LeafSclerenchymaCell": "",
+            "LeafVascularBundle": "A unit strand of the vascular system containing the vascular tissues, xylem and phloem in a leaf.",
+            "LeafXylemCell": "",
+            "Leaflet": "A segment of a compound leaf.",
+            "Petiole": "A stalk of a leaf."
+        },
+        "LeafBlade": "The lamina of a leaf, usually dorsiventrally flattened and expanded.",
+        "Leaflet": "A segment of a compound leaf.",
+        "Petiole": "A stalk of a leaf.",
+        "comment": "An organ of a plant that typically has either a vegetative or reproductive function.",
+        "RootSystem": {
+            "comment": "Plant axes that bear no leaves and are often found below ground.",
+            "CoarseRoot": "Roots that have undergone secondary thickening and have a woody structure.",
+            "partof": "true",
+            "FineRoot": "Primary roots, usually <2 mm in diameter, that are often heavily branched, support mycorrhizas and are short lived.",
+            "RootCambium": "A lateral meristem, the cells of which divide mostly periclinally in the root.",
+            "RootTissue": "Differentiated root cells grouped together."
+        },
+        "Seed": "A propagating organ formed in the reproductive cycle of gymnosperms and angiosperms, derived from the ovule and enclosing an embryo.",
+        "ShootSystem": {
+            "comment": "A collective plant structure that produces shoot apical meristems and the plant structures that arise from them.",
+            "Canopy": "The aboveground portion of a plant or plant community formed by plant crowns.",
+            "partof": "true",
+            "Cotyledon": "A leaf formed at the first node of a sporophyte.",
+            "Fruit": {
+                "comment": "A collective plant structure containing one or more embryos, which as a whole, develops from a gynoecium.",
+                "Seed": "A propagating organ formed in the reproductive cycle of gymnosperms and angiosperms, derived from the ovule and enclosing an embryo.",
+                "partof": "true"
+            },
+            "Inflorescence": {
+                "comment": "The part of the plant axial system that bears flowers and is typically above the uppermost foliage leaves.",
+                "Flower": "A reproductive shoot system that has at least one carpel or at least one stamen and does not contain any other determinate shoot system as a part.",
+                "partof": "true"
+            },
+            "ShootCambium": "A lateral meristem, the cells of which divide mostly periclinally in the shoot.",
+            "Stem": {
+                "comment": "A shoot axis that is the primary axis of a plant.",
+                "Branch": {
+                    "comment": "A shoot axis that develops from an axillary meristem or from the shoot apical meristem.",
+                    "BranchWood": "The wood on a branch.",
+                    "partof": "true",
+                    "Twig": "A small thin terminal branch of a woody plant."
+                },
+                "partof": "true",
+                "Leaf": {
+                    "comment": "A phyllome that is not part of a flower.",
+                    "Cotyledon": "A leaf formed at the first node of a sporophyte.",
+                    "LeafBlade": "The lamina of a leaf, usually dorsiventrally flattened and expanded.",
+                    "partof": "true",
+                    "LeafEpidermisCell": "A leaf cell that constitutes leaf dermal tissue.",
+                    "LeafLaminaCell": "A cell that is part of a leaf lamina.",
+                    "LeafMesophyllCell": "A chlorenchyma cell that is part of a leaf mesophyll.",
+                    "LeafMitochondria": "Mitochondira found in a leaf.",
+                    "LeafPalisadeCell": "",
+                    "LeafPhloemCell": "",
+                    "LeafSclerenchymaCell": "",
+                    "LeafVascularBundle": "A unit strand of the vascular system containing the vascular tissues, xylem and phloem in a leaf.",
+                    "LeafXylemCell": "",
+                    "Leaflet": "A segment of a compound leaf.",
+                    "Petiole": "A stalk of a leaf."
+                },
+                "StemWood": "The wood on a stem."
+            }
+        },
+        "Stem": {
+            "comment": "A shoot axis that is the primary axis of a plant.",
+            "Branch": {
+                "comment": "A shoot axis that develops from an axillary meristem or from the shoot apical meristem.",
+                "BranchWood": "The wood on a branch.",
+                "partof": "true",
+                "Twig": "A small thin terminal branch of a woody plant."
+            },
+            "partof": "true",
+            "Leaf": {
+                "comment": "A phyllome that is not part of a flower.",
+                "Cotyledon": "A leaf formed at the first node of a sporophyte.",
+                "LeafBlade": "The lamina of a leaf, usually dorsiventrally flattened and expanded.",
+                "partof": "true",
+                "LeafEpidermisCell": "A leaf cell that constitutes leaf dermal tissue.",
+                "LeafLaminaCell": "A cell that is part of a leaf lamina.",
+                "LeafMesophyllCell": "A chlorenchyma cell that is part of a leaf mesophyll.",
+                "LeafMitochondria": "Mitochondira found in a leaf.",
+                "LeafPalisadeCell": "",
+                "LeafPhloemCell": "",
+                "LeafSclerenchymaCell": "",
+                "LeafVascularBundle": "A unit strand of the vascular system containing the vascular tissues, xylem and phloem in a leaf.",
+                "LeafXylemCell": "",
+                "Leaflet": "A segment of a compound leaf.",
+                "Petiole": "A stalk of a leaf."
+            },
+            "StemWood": "The wood on a stem."
+        }
+    },
+    "Substance": {
+        "Compound": {
+            "comment": "",
+            "Ash": ""
+        },
+        "Elemental": {
+            "comment": "",
+            "Carbon": "",
+            "CarbonDelta13": "",
+            "Hydrogen": "",
+            "Nitrogen": "",
+            "NitrogenDelta15": "",
+            "Phosphorus": "",
+            "Potassium": "",
+            "Sulpher": ""
+        },
+        "comment": ""
+    },
+    "PlantCell": {
+        "EpidermisCell": {
+            "comment": "A plant cell that constitutes dermal tissue.",
+            "LeafEpidermisCell": "A leaf cell that constitutes leaf dermal tissue."
+        },
+        "LeafCell": "",
+        "LeafLaminaCell": "A cell that is part of a leaf lamina.",
+        "MesophyllCell": {
+            "comment": "",
+            "LeafMesophyllCell": "A chlorenchyma cell that is part of a leaf mesophyll."
+        },
+        "PalisadeCell": {
+            "comment": "",
+            "LeafPalisadeCell": ""
+        },
+        "PhloemCell": {
+            "comment": "A cell of the phloem, which is a part of vascular plant tissue whose principal function is conducting organic substances.",
+            "LeafPhloemCell": ""
+        },
+        "comment": "A cell of a plant, which typically has: a central vacuole; a cell wall composed of cellulose and hemicellulose; specialised cell–cell pathways known as plasmodesmata; and plastids (like chloroplasts) that contain chlorophyll for photosynthesis.",
+        "SclerenchymaCell": {
+            "comment": "Sclerenchyma cells are the principal supporting cells in plant tissues that have ceased elongation, and whose walls consist of cellulose, hemicellulose and lignin. ",
+            "LeafSclerenchymaCell": ""
+        },
+        "XylemCell": {
+            "comment": "Plant cells that are part of the xylem and are often long tracheary elements that transport water.",
+            "LeafXylemCell": ""
+        }
+    },
+    "Litter": {
+        "LeafLitter": "Dead leaf material.",
+        "comment": "Dead plant material."
+    },
+    "Organelle": {
+        "Mitochondria": {
+            "comment": "A membrane-enclosed organelle that generates most of the cell's supply of adenosine triphosphate (ATP) and  is involved in signaling, cellular differentiation, control of the cell cycle and cell growth.",
+            "LeafMitochondria": "Mitochondira found in a leaf."
+        },
+        "comment": "A specialized subunit within a cell that has a specific function and is usually separately enclosed within its own lipid bilayer."
+    }
+}

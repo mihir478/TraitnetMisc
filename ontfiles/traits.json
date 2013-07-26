@@ -1,0 +1,1632 @@
+{
+    "BarkNitrogenConcentrationPerMass": {
+        "entities": [
+            "Bark",
+            "Nitrogen"
+        ],
+        "characteristics": [
+            "Concentration"
+        ],
+        "comment": "The total amount of nitrogen per unit of dry bark mass."
+    },
+    "BarkPhosphorousConcentrationPerMass": {
+        "entities": [
+            "Bark",
+            "Phosphorus"
+        ],
+        "characteristics": [
+            "Concentration"
+        ],
+        "comment": "The total amount of phosphorus per unit of bark dry mass"
+    },
+    "BarkThickness": {
+        "entities": [
+            "Bark"
+        ],
+        "characteristics": [
+            "Thickness"
+        ],
+        "comment": "The thickness of the part of the stem that is external to the wood including vascular cambium."
+    },
+    "BranchMaintenanceRespirationAtGivenTemperaturePerArea": {
+        "entities": [
+            "Branch",
+            "Carbon"
+        ],
+        "characteristics": [
+            "MaintenanceRespiration"
+        ],
+        "comment": "The rate of branch maintenance respiration at specified temperature expressed per unit branch area."
+    },
+    "BranchMaintenanceRespirationAtGivenTemperaturePerMass": {
+        "entities": [
+            "Branch",
+            "Carbon"
+        ],
+        "characteristics": [
+            "MaintenanceRespiration"
+        ],
+        "comment": "The rate of branch maintenance respiration at specified temperature expressed per unit branch mass."
+    },
+    "BranchNitrogenConcentrationPerMass": {
+        "entities": [
+            "Branch",
+            "Carbon"
+        ],
+        "characteristics": [
+            "Concentration"
+        ],
+        "comment": "The total amount of nitrogen per unit of dry branch mass."
+    },
+    "BranchTotalRespirationAtGivenTemperaturePerArea": {
+        "entities": [
+            "Branch",
+            "Carbon"
+        ],
+        "characteristics": [
+            "Respiration"
+        ],
+        "comment": "The rate of branch total respiration at specified temperature expressed per unit branch area."
+    },
+    "BranchTotalRespirationAtGivenTemperaturePerMass": {
+        "entities": [
+            "Branch",
+            "Carbon"
+        ],
+        "characteristics": [
+            "Respiration"
+        ],
+        "comment": "The rate of branch total respiration at specified temperature expressed per unit branch mass. "
+    },
+    "BranchWoodCarbonConcentrationPerMass": {
+        "entities": [
+            "BranchWood",
+            "Carbon"
+        ],
+        "characteristics": [
+            "Concentration"
+        ],
+        "comment": "The total amount of carbon per unit of dry branch wood mass."
+    },
+    "CanopyDiameterAlongLongestAxis": {
+        "entities": [
+            "Canopy"
+        ],
+        "characteristics": [
+            "DiameterAlongLongestAxis"
+        ],
+        "comment": "The largest dimension of a plant canopy."
+    },
+    "CanopyDiameterPerpendicularToFirstAxis": {
+        "entities": [
+            "Canopy"
+        ],
+        "characteristics": [
+            "Diameter"
+        ],
+        "comment": "The dimension of a plant canopy perpendicular to the largest dimension."
+    },
+    "CanopyHeightObserved": {
+        "entities": [
+            "Canopy"
+        ],
+        "characteristics": [
+            "Height"
+        ],
+        "comment": "The shortest distance between the upper boundary of the main photosynthetic tissues on a plant and the ground level."
+    },
+    "CoarseRootCarbonConcentrationPerMass": {
+        "entities": [
+            "CoarseRoot",
+            "Carbon"
+        ],
+        "characteristics": [
+            "Concentration"
+        ],
+        "comment": "The total amount of carbon per unit of dry coarse root mass."
+    },
+    "CoarseRootPhosphorusConcentrationPerMass": {
+        "entities": [
+            "CoarseRoot",
+            "Phosphorus"
+        ],
+        "characteristics": [
+            "Concentration"
+        ],
+        "comment": "The total amount of phosphorus per unit of coarse root dry mass."
+    },
+    "DispersuleHeight": {
+        "entities": [
+            "Fruit"
+        ],
+        "characteristics": [
+            "Height"
+        ],
+        "comment": "The third linear dimension of a dispersule."
+    },
+    "DispersuleLength": {
+        "entities": [
+            "Fruit"
+        ],
+        "characteristics": [
+            "Length"
+        ],
+        "comment": "The largest linear dimension of a dispersule."
+    },
+    "DispersuleShape": {
+        "entities": [
+            "Fruit"
+        ],
+        "characteristics": [
+            "Shape"
+        ],
+        "comment": "The variance of the three dimensions, length width and height, divided by each dimension's length so that length is unity."
+    },
+    "DispersuleWidth": {
+        "entities": [
+            "Fruit"
+        ],
+        "characteristics": [
+            "Width"
+        ],
+        "comment": "The smallest linear dimension of a dispersule."
+    },
+    "EpidermalCellArea": {
+        "entities": [
+            "EpidermisCell"
+        ],
+        "characteristics": [
+            "Area"
+        ],
+        "comment": "The cross-sectional area of an epidermis cell."
+    },
+    "FineRootFrostHardiness": {
+        "entities": [
+            "FineRoot"
+        ],
+        "characteristics": [
+            "ToleranceToFrost"
+        ],
+        "comment": "The ability of fine roots to withstand frost."
+    },
+    "FineRootNitrogenConcentrationPerMass": {
+        "entities": [
+            "FineRoot",
+            "Nitrogen"
+        ],
+        "characteristics": [
+            "Concentration"
+        ],
+        "comment": "The total amount of nitrogen per unit of dry fine root mass."
+    },
+    "LeafAbsorbance": {
+        "entities": [
+            "Leaf"
+        ],
+        "characteristics": [
+            "Absorbance"
+        ],
+        "comment": "The ratio of light absorbed by a leaf relative to incoming radiation."
+    },
+    "LeafAngle": {
+        "entities": [
+            "Leaf"
+        ],
+        "characteristics": [
+            "Angle"
+        ],
+        "comment": "The average angle of the leaf relative to horizontal."
+    },
+    "LeafArea": {
+        "entities": [
+            "Leaf"
+        ],
+        "characteristics": [
+            "Area"
+        ],
+        "comment": "The one-sided projected surface area of a single leaf or leaf lamina."
+    },
+    "LeafAreaPerSapwoodArea": {
+        "entities": [
+            "SapWood",
+            "Leaf"
+        ],
+        "characteristics": [
+            "DesnityAsAreaPerArea"
+        ],
+        "comment": "The total leaf area of the canopy divided by the sapwood area."
+    },
+    "LeafCarbonConcentrationPerArea": {
+        "entities": [
+            "Leaf",
+            "Carbon"
+        ],
+        "characteristics": [
+            "Concentration"
+        ],
+        "comment": "The total amount of carbon per unit of leaf area (one-sided)."
+    },
+    "LeafCarbonConcentrationPerMass": {
+        "entities": [
+            "Leaf",
+            "Carbon"
+        ],
+        "characteristics": [
+            "Concentration"
+        ],
+        "comment": "The total amount of carbon per unit of dry leaf mass."
+    },
+    "LeafCarbonDelta13": {
+        "entities": [
+            "Leaf",
+            "CarbonDelta13"
+        ],
+        "characteristics": [
+            "Concentration"
+        ],
+        "comment": "The 13C/12C ratio of leaf biomass relative to that of a standard (usually Pee Dee Belemnite)."
+    },
+    "LeafCellMeanSize": {
+        "entities": [
+            "LeafCell"
+        ],
+        "characteristics": [
+            "Volume"
+        ],
+        "comment": "The average volume of a leaf cell."
+    },
+    "LeafCompoundness": {
+        "entities": [
+            "Leaf"
+        ],
+        "characteristics": [
+            "Compoundness"
+        ],
+        "comment": "The extent and scheme of the compoundness of a leaf."
+    },
+    "LeafDryMatterContent": {
+        "entities": [
+            "Leaf"
+        ],
+        "characteristics": [
+            "Content"
+        ],
+        "comment": "The oven dry mass of a leaf divided by its water saturated fresh mass."
+    },
+    "LeafEpidermalCellSize": {
+        "entities": [
+            "LeafEpidermisCell"
+        ],
+        "characteristics": [
+            "Length"
+        ],
+        "comment": "The largest dimension of an epidermis cell as measured on a leaf cross-section."
+    },
+    "LeafFrostHardiness": {
+        "entities": [
+            "Leaf"
+        ],
+        "characteristics": [
+            "ToleranceToFrost"
+        ],
+        "comment": "The ability of a leaf/bud to withstand frost."
+    },
+    "LeafJmaxAtAmbientTemperaturePerArea": {
+        "entities": [
+            "Leaf"
+        ],
+        "characteristics": [
+            "MaximumRateOfElectronTransportPerArea"
+        ],
+        "comment": "The maximum electron transport rate per unit leaf area measured at ambient temperature."
+    },
+    "LeafJmaxAtAmbientTemperaturePerMass": {
+        "entities": [
+            "Leaf"
+        ],
+        "characteristics": [
+            "MaximumRateOfElectronTransportPerMass"
+        ],
+        "comment": "The maximum electron transport rate per unit leaf mass measured at ambient temperature."
+    },
+    "LeafLaminaCellLowerEpidermisArea": {
+        "entities": [
+            "LeafLaminaCell"
+        ],
+        "characteristics": [
+            "Area"
+        ],
+        "comment": "The cross-sectional area of a cell from lower epidermis (hypodermis)."
+    },
+    "LeafLifespan": {
+        "entities": [
+            "Leaf"
+        ],
+        "characteristics": [
+            "LifeSpan"
+        ],
+        "comment": "The time period during which an individual leaf or part of a leaf is alive and physiologically active."
+    },
+    "LeafLitterNitrogenConcentrationPerArea": {
+        "entities": [
+            "LeafLitter",
+            "Nitrogen"
+        ],
+        "characteristics": [
+            "Concentration"
+        ],
+        "comment": "The total amount of nitrogen per unit of leaf litter area (one-sided)."
+    },
+    "LeafLitterPH": {
+        "entities": [
+            "LeafLitter"
+        ],
+        "characteristics": [
+            "pH"
+        ],
+        "comment": "The pH of leaf litter."
+    },
+    "LeafMaintenanceRespirationAtGivenTemperaturePerArea": {
+        "entities": [
+            "Leaf",
+            "Carbon"
+        ],
+        "characteristics": [
+            "MaintenanceRespiration"
+        ],
+        "comment": "The rate of leaf maintenance respiration at specified temperature expressed per unit leaf area."
+    },
+    "LeafMassPerArea": {
+        "entities": [
+            "Leaf"
+        ],
+        "characteristics": [
+            "DensityAsMassPerArea"
+        ],
+        "comment": "The oven-dry mass of a leaf divided by its one-sided area."
+    },
+    "LeafMesophyllCellArea": {
+        "entities": [
+            "LeafMesophyllCell"
+        ],
+        "characteristics": [
+            "Area"
+        ],
+        "comment": "The cross-sectional area of a mesophyll cell."
+    },
+    "LeafMesophyllCellHeight": {
+        "entities": [
+            "LeafMesophyllCell"
+        ],
+        "characteristics": [
+            "Height"
+        ],
+        "comment": "The largest dimension of a mesophyll cell as measured on a leaf cross-section."
+    },
+    "LeafMesophyllCellVolume": {
+        "entities": [
+            "LeafMesophyllCell"
+        ],
+        "characteristics": [
+            "Volume"
+        ],
+        "comment": "The volume of a leaf mesophyll cell."
+    },
+    "LeafMitochondrialRespirationInTheLight_Blackman": {
+        "entities": [
+            "LeafMitochondria",
+            "Carbon"
+        ],
+        "characteristics": [
+            "Respiration"
+        ],
+        "comment": "The rate of leaf mitochondrial respiration in the light calculated by fitting the Blackman response."
+    },
+    "LeafMitochondrialRespirationInTheLight_Farquhar": {
+        "entities": [
+            "LeafMitochondria",
+            "Carbon"
+        ],
+        "characteristics": [
+            "Respiration"
+        ],
+        "comment": "The rate of leaf michondrial respiration measured in the light calculated by fitting the Farquhar-von Caemmerer model to the A-Ci curve."
+    },
+    "LeafNitrogenConcentrationPerArea": {
+        "entities": [
+            "Leaf",
+            "Nitrogen"
+        ],
+        "characteristics": [
+            "Concentration"
+        ],
+        "comment": "The total amount of nitrogen per unit of dry leaf mass."
+    },
+    "LeafNitrogenConcentrationPerMass": {
+        "entities": [
+            "Leaf",
+            "Nitrogen"
+        ],
+        "characteristics": [
+            "Concentration"
+        ],
+        "comment": "The total amount of nitrogen per unit of leaf area (one-sided)."
+    },
+    "LeafNumberPerUnitShootLength": {
+        "entities": [
+            "Leaf"
+        ],
+        "characteristics": [
+            "DensityAsNumberPerLength"
+        ],
+        "comment": "The total number of leaves on a shoot divided by its length."
+    },
+    "LeafPH": {
+        "entities": [
+            "Leaf"
+        ],
+        "characteristics": [
+            "pH"
+        ],
+        "comment": ""
+    },
+    "LeafPalatability": {
+        "entities": [
+            "Leaf"
+        ],
+        "characteristics": [
+            "Palatability"
+        ],
+        "comment": "The tolerance of a leaf to be not eaten."
+    },
+    "LeafPalisadeCellCrossSectionalArea": {
+        "entities": [
+            "LeafPalisadeCell"
+        ],
+        "characteristics": [
+            "Area"
+        ],
+        "comment": "The cross-sectional area of a cell from palissadic parenchyma."
+    },
+    "LeafPhenology": {
+        "entities": [
+            "Leaf"
+        ],
+        "characteristics": [
+            "PhenologyType"
+        ],
+        "comment": "The timing of foliage of the whole canopy."
+    },
+    "LeafPhloemCellSize": {
+        "entities": [
+            "Leaf",
+            "LeafPhloemCell"
+        ],
+        "characteristics": [
+            "Area"
+        ],
+        "comment": "The cross-sectional area of a phloem cell."
+    },
+    "LeafPhosphorusConcentrationPerMass": {
+        "entities": [
+            "Leaf",
+            "Phosphorus"
+        ],
+        "characteristics": [
+            "Concentration"
+        ],
+        "comment": "The total amount of phosphorus per unit of leaf dry mass."
+    },
+    "LeafPhosphorusConcentrationperArea": {
+        "entities": [
+            "Leaf",
+            "Phosphorus"
+        ],
+        "characteristics": [
+            "Concentration"
+        ],
+        "comment": "The total amount of phosphorus per unit of leaf area (one-sided)."
+    },
+    "LeafPuncturability": {
+        "entities": [
+            "Leaf"
+        ],
+        "characteristics": [
+            "Puncturability"
+        ],
+        "comment": "The resistance of leaf to be punctured."
+    },
+    "LeafResistanceToFracture": {
+        "entities": [
+            "Leaf"
+        ],
+        "characteristics": [
+            "ResistanceToFracture"
+        ],
+        "comment": "The force needed to cut a leaf or leaf fragment at a constant angle (e.g. 20°) and speed."
+    },
+    "LeafRespirationAt25CPerMass": {
+        "entities": [
+            "Leaf",
+            "Carbon"
+        ],
+        "characteristics": [
+            "RespirationAt25oC"
+        ],
+        "comment": ""
+    },
+    "LeafRespirationAtGivenTemperaturePerArea": {
+        "entities": [
+            "Leaf",
+            "Carbon"
+        ],
+        "characteristics": [
+            "Respiration"
+        ],
+        "comment": "The rate of leaf total respiration at specified temperature expressed per unit leaf area."
+    },
+    "LeafRespirationAtGrowthTemperaturePerMass": {
+        "entities": [
+            "Leaf",
+            "Carbon"
+        ],
+        "characteristics": [
+            "RespirationAtGrowthTemp"
+        ],
+        "comment": "The respiration rate adjusted to mean growth season temperature expressed per unit leaf dry mass."
+    },
+    "LeafRespirationRatePerArea": {
+        "entities": [
+            "Leaf",
+            "Carbon"
+        ],
+        "characteristics": [
+            "Respiration"
+        ],
+        "comment": "The leaf respiration rate at measurement temperature expressed per unit leaf dry mass"
+    },
+    "LeafRespirationRatePerMass": {
+        "entities": [
+            "Leaf",
+            "Carbon"
+        ],
+        "characteristics": [
+            "Respiration"
+        ],
+        "comment": "The leaf respiration rate at measurement temperature expressed per unit leaf area."
+    },
+    "LeafSclerenchymaCellSize": {
+        "entities": [
+            "Leaf",
+            "LeafSclerenchymaCell"
+        ],
+        "characteristics": [
+            "Area"
+        ],
+        "comment": "The cross-sectional area of a sclerenchyma cell."
+    },
+    "LeafSclerophylly": {
+        "entities": [
+            "Leaf"
+        ],
+        "characteristics": [
+            "Sclerophylly"
+        ],
+        "comment": "The ability of a leaf to resist dry conditions."
+    },
+    "LeafSpecificArea": {
+        "entities": [
+            "Leaf"
+        ],
+        "characteristics": [
+            "SpecificArea"
+        ],
+        "comment": "The one sided area of a fresh leaf devided by its oven-dry mass."
+    },
+    "LeafTensileStrength": {
+        "entities": [
+            "Leaf"
+        ],
+        "characteristics": [
+            "TensileStrength"
+        ],
+        "comment": "The force needed to tear a leaf (fragment) divided by its width."
+    },
+    "LeafVMaxAt25CPerArea": {
+        "entities": [
+            "Leaf"
+        ],
+        "characteristics": [
+            "MaxCarboxylationCapacity"
+        ],
+        "comment": "The maximum carboxylation capacity per unit leaf area measured at 25°C"
+    },
+    "LeafVmaxAt25CPerMass": {
+        "entities": [
+            "Leaf",
+            "Carbon"
+        ],
+        "characteristics": [
+            "MaxCarboxylationCapacity"
+        ],
+        "comment": "The maximum carboxylation capacity per unit leaf mass measured at 25°C."
+    },
+    "LeafVmaxAtAmbientTemperaturePerArea": {
+        "entities": [
+            "Leaf",
+            "Carbon"
+        ],
+        "characteristics": [
+            "MaxCarboxylationCapacity"
+        ],
+        "comment": "The maximum carboxylation capacity per unit leaf mass at ambient temperature."
+    },
+    "LeafWaterPotential": {
+        "entities": [
+            "Leaf"
+        ],
+        "characteristics": [
+            "WaterPotential"
+        ],
+        "comment": "The state of water in the leaf."
+    },
+    "LeafXylemCellSize": {
+        "entities": [
+            "Leaf",
+            "LeafXylemCell"
+        ],
+        "characteristics": [
+            "Area"
+        ],
+        "comment": "The cross-sectional area of a xylem cell"
+    },
+    "LeafbladeLength": {
+        "entities": [
+            "LeafBlade"
+        ],
+        "characteristics": [
+            "Length"
+        ],
+        "comment": "The length of a leaf blade."
+    },
+    "LeafbladeWidth": {
+        "entities": [
+            "LeafBlade"
+        ],
+        "characteristics": [
+            "Width"
+        ],
+        "comment": "The width of a leaf blade."
+    },
+    "LeafletArea": {
+        "entities": [
+            "Leaflet"
+        ],
+        "characteristics": [
+            "Area"
+        ],
+        "comment": "The one-sided projected surface area of a single leaflet of a compound leaf."
+    },
+    "LeafletLength": {
+        "entities": [
+            "Leaflet"
+        ],
+        "characteristics": [
+            "Length"
+        ],
+        "comment": "The length of a single leaflet of a compound leaf."
+    },
+    "LeafletWidth": {
+        "entities": [
+            "Leaflet"
+        ],
+        "characteristics": [
+            "Width"
+        ],
+        "comment": "The width of a single leaflet of a compound leaf."
+    },
+    "LitterCarbonConcentrationPerMass": {
+        "entities": [
+            "Litter",
+            "Carbon"
+        ],
+        "characteristics": [
+            "Concentration"
+        ],
+        "comment": "The total amount of carbon per unit of dry litter mass."
+    },
+    "LitterDecompostionRate": {
+        "entities": [
+            "Litter"
+        ],
+        "characteristics": [
+            "Decomposition"
+        ],
+        "comment": "The rate of litter decomposition measured under standardized conditions."
+    },
+    "LitterNitrogenConcentrationPerMass": {
+        "entities": [
+            "Litter",
+            "Nitrogen"
+        ],
+        "characteristics": [
+            "Concentration"
+        ],
+        "comment": ""
+    },
+    "LitterPhosphorusConcentrationPerMass": {
+        "entities": [
+            "Litter",
+            "Phosphorus"
+        ],
+        "characteristics": [
+            "Concentration"
+        ],
+        "comment": "The total amount of phosphorus per unit of litter dry mass."
+    },
+    "PlantBranchingArchitecture": {
+        "entities": [
+            "Plant"
+        ],
+        "characteristics": [
+            "BranchingArchitecture"
+        ],
+        "comment": "The branching architecture of a plant."
+    },
+    "PlantClonality": {
+        "entities": [
+            "Plant"
+        ],
+        "characteristics": [
+            "Clonality"
+        ],
+        "comment": "The cloning capacity of a plant."
+    },
+    "PlantConduitArea": {
+        "entities": [
+            "Conduit"
+        ],
+        "characteristics": [
+            "Area"
+        ],
+        "comment": "The cross-sectional area of conduits (vessels or tracheids) in a trunk."
+    },
+    "PlantConduitDensity": {
+        "entities": [
+            "Conduit"
+        ],
+        "characteristics": [
+            "DensityAsNumberPerArea"
+        ],
+        "comment": "Number of conduits (vessels and tracheids) per unit area of conduits (vessels or tracheids) in a trunk."
+    },
+    "PlantConduitLumenAreaPerSapwoodArea": {
+        "entities": [
+            "SapWood",
+            "ConduitLumen"
+        ],
+        "characteristics": [
+            "DesnityAsAreaPerArea"
+        ],
+        "comment": "The proportion of stem cross-sectional area that is conducting area."
+    },
+    "PlantCotyledonNitrogenConcentrationPerMass": {
+        "entities": [
+            "Cotyledon",
+            "Nitrogen"
+        ],
+        "characteristics": [
+            "Concentration"
+        ],
+        "comment": "The total amount of nitrogen per unit of dry cotyledon mass."
+    },
+    "PlantDispersalSyndrom": {
+        "entities": [
+            "Plant"
+        ],
+        "characteristics": [
+            "DispersalSyndrom"
+        ],
+        "comment": "Mode of dispersal of dispersule (or propagule: unit of seed fruit or spore as it is dispersed)."
+    },
+    "PlantFlammability": {
+        "entities": [
+            "Plant"
+        ],
+        "characteristics": [
+            "Flammability"
+        ],
+        "comment": "The ability of a plant species to ignate and spread flames."
+    },
+    "PlantFloweringHeightWithHighestLeafElongated": {
+        "entities": [
+            "Plant"
+        ],
+        "characteristics": [
+            "Height"
+        ],
+        "comment": "The shortest distance between the highest leaf elongated vertically on a plant at the flowering stage and the ground level."
+    },
+    "PlantFloweringHeightWithHighestLeafNotElongated": {
+        "entities": [
+            "Plant"
+        ],
+        "characteristics": [
+            "Height"
+        ],
+        "comment": "The shortest distance between the highest leaf as it spontaneously stands on a plant at the flowering stage and the ground level."
+    },
+    "PlantGerminationStimulation": {
+        "entities": [
+            "Plant"
+        ],
+        "characteristics": [
+            "GerminationStimulation"
+        ],
+        "comment": "The need for seeds to be stimulated to germinate."
+    },
+    "PlantGerminationStimulationByDigestion": {
+        "entities": [
+            "Plant"
+        ],
+        "characteristics": [
+            "GerminationStimulationByDigestion"
+        ],
+        "comment": "The need for seeds to be stimulated by digestion by an animal to germinate."
+    },
+    "PlantGrowthForm": {
+        "entities": [
+            "Plant"
+        ],
+        "characteristics": [
+            "GrowthForm"
+        ],
+        "comment": "Determined in relation to canopy structure and canopy height."
+    },
+    "PlantHtAt20years": {
+        "entities": [
+            "Plant"
+        ],
+        "characteristics": [
+            "HeightAt20years"
+        ],
+        "comment": ""
+    },
+    "PlantHtAtInflorescenceTop": {
+        "entities": [
+            "Plant"
+        ],
+        "characteristics": [
+            "HeightAtInflorescenceTop"
+        ],
+        "comment": "The shortest distance between the top of the inflorescence and the ground level."
+    },
+    "PlantHtObserved": {
+        "entities": [
+            "Plant"
+        ],
+        "characteristics": [
+            "Height"
+        ],
+        "comment": "The shortest distance between the upper boundary of the main photosynthetic tissues on a plant and the ground level."
+    },
+    "PlantLifeForm": {
+        "entities": [
+            "Plant"
+        ],
+        "characteristics": [
+            "LifeForm-Raunkiaer"
+        ],
+        "comment": "Determined in relation to the position of the perennating (meristematic) tissue to ground surface."
+    },
+    "PlantLifeHistory": {
+        "entities": [
+            "Plant"
+        ],
+        "characteristics": [
+            "LifeHistory"
+        ],
+        "comment": "The common types of timing and duration of survival behavior of individual plants in the absence of disturbances or catastrophes."
+    },
+    "PlantLifespan": {
+        "entities": [
+            "Plant"
+        ],
+        "characteristics": [
+            "LifeSpan"
+        ],
+        "comment": "The length of time a plant remains alive."
+    },
+    "PlantMaxHtObsrvdOfLeaf": {
+        "entities": [
+            "Plant"
+        ],
+        "characteristics": [
+            "Height"
+        ],
+        "comment": "The shortest distance between the highest leaf borne by plant and the ground level."
+    },
+    "PlantMaximumHeight": {
+        "entities": [
+            "Plant"
+        ],
+        "characteristics": [
+            "MaxHeight"
+        ],
+        "comment": "The maximum vegetative height recorded for the species."
+    },
+    "PlantMaximumHeightObservedOfFlower": {
+        "entities": [
+            "Plant"
+        ],
+        "characteristics": [
+            "Height"
+        ],
+        "comment": "The shortest distance between the highest flower borne by plant and the ground level."
+    },
+    "PlantMaximumLongevity": {
+        "entities": [
+            "Plant"
+        ],
+        "characteristics": [
+            "MaximumLifeSpan"
+        ],
+        "comment": "The maximum length of time a plant remains alive."
+    },
+    "PlantMultiStemness": {
+        "entities": [
+            "Plant"
+        ],
+        "characteristics": [
+            "MultiStemness"
+        ],
+        "comment": "Does a plant have multi-stems or not?"
+    },
+    "PlantNitrogenFixationCapacity": {
+        "entities": [
+            "Plant"
+        ],
+        "characteristics": [
+            "NitrogenFixationCapacity"
+        ],
+        "comment": "The capacity of a plant to fix nitrogen."
+    },
+    "PlantNutrientUptakeCapacity": {
+        "entities": [
+            "Plant"
+        ],
+        "characteristics": [
+            "NutrientUptakeStrategy"
+        ],
+        "comment": "The mode of uptake of main macronutrients (mainly nitrogen and phosphorus)."
+    },
+    "PlantPhotosyntheticPathway": {
+        "entities": [
+            "Plant"
+        ],
+        "characteristics": [
+            "PhotosyntheticPathway"
+        ],
+        "comment": "C3, C4, or CAM."
+    },
+    "PlantPhotosyntheticRatePerArea": {
+        "entities": [
+            "Plant",
+            "Carbon"
+        ],
+        "characteristics": [
+            "RateOfPhotosynthesis"
+        ],
+        "comment": "The maximum photosynthetic rate per leaf area at measurement temperature."
+    },
+    "PlantPhotosyntheticRatePerDryMass": {
+        "entities": [
+            "Plant",
+            "Carbon"
+        ],
+        "characteristics": [
+            "RateOfPhotosynthesis"
+        ],
+        "comment": "The maximum photosynthetic rate per leaf dry mass at measurement temperature."
+    },
+    "PlantPollinationSyndrome": {
+        "entities": [
+            "Plant"
+        ],
+        "characteristics": [
+            "PollinationSyndrom"
+        ],
+        "comment": "The mode by which a plant is pollinated."
+    },
+    "PlantRegenerationAfterFire": {
+        "entities": [
+            "Plant"
+        ],
+        "characteristics": [
+            "ResproutingCapacityAfterFire"
+        ],
+        "comment": "The type of regeneration after fire."
+    },
+    "PlantReleasingHeight": {
+        "entities": [
+            "Plant"
+        ],
+        "characteristics": [
+            "HeightAtReleasing"
+        ],
+        "comment": "The height at which mature seeds are spontaneously released."
+    },
+    "PlantReproductiveHeight": {
+        "entities": [
+            "Plant"
+        ],
+        "characteristics": [
+            "Height"
+        ],
+        "comment": "The shortest distance between the top of reproductive structures and the ground level."
+    },
+    "PlantResproutAgeOfMaturity": {
+        "entities": [
+            "PlantResprout"
+        ],
+        "characteristics": [
+            "AgeOfMaturity"
+        ],
+        "comment": ""
+    },
+    "PlantResproutingCapacityAfterClipping": {
+        "entities": [
+            "Plant"
+        ],
+        "characteristics": [
+            "ResproutingCapacityAfterClipping"
+        ],
+        "comment": "The ability of a plant to resprout after clipping."
+    },
+    "PlantResproutingCapacityAfterDisturbance": {
+        "entities": [
+            "Plant"
+        ],
+        "characteristics": [
+            "ResproutingCapacityAfterDisturbance"
+        ],
+        "comment": "The ability of a plant to resprout after destruction of most of its aboveground biomass."
+    },
+    "PlantResproutingCapacityAfterFire": {
+        "entities": [
+            "Plant"
+        ],
+        "characteristics": [
+            "ResproutingCapacityAfterFire"
+        ],
+        "comment": "The ability of a plant to resprout after fire."
+    },
+    "PlantSaplingAgeOfMaturity": {
+        "entities": [
+            "PlantSapling"
+        ],
+        "characteristics": [
+            "AgeOfMaturity"
+        ],
+        "comment": "The mean age of saplings at the first successful reproduction i.e. when most of the saplings produce the first seed crop."
+    },
+    "PlantSpiniscence": {
+        "entities": [
+            "Plant"
+        ],
+        "characteristics": [
+            "Spinescence"
+        ],
+        "comment": "The presence and amount of spines."
+    },
+    "PlantToleranceToDrought": {
+        "entities": [
+            "Plant"
+        ],
+        "characteristics": [
+            "ToleranceToDrought"
+        ],
+        "comment": "The ability of a plant to withstand drought."
+    },
+    "PlantToleranceToFrost": {
+        "entities": [
+            "Plant"
+        ],
+        "characteristics": [
+            "ToleranceToFrost"
+        ],
+        "comment": "The ability of a plant to withstand frost."
+    },
+    "PlantToleranceToHighTemperatures": {
+        "entities": [
+            "Plant"
+        ],
+        "characteristics": [
+            "ToleranceToHeat"
+        ],
+        "comment": "The ability of a plant to withstand high temperatures."
+    },
+    "PlantToleranceToShade": {
+        "entities": [
+            "Plant"
+        ],
+        "characteristics": [
+            "ToleranceToShade"
+        ],
+        "comment": "The ability of a plant to withstand low light conditions."
+    },
+    "PlantToleranceToWindthrow": {
+        "entities": [
+            "Plant"
+        ],
+        "characteristics": [
+            "ToleranceToWindThrow"
+        ],
+        "comment": "The ability of a plant to withstand windthrows."
+    },
+    "PlantTotalNitrogenConcentrationPerMass": {
+        "entities": [
+            "Plant",
+            "Nitrogen"
+        ],
+        "characteristics": [
+            "Concentration"
+        ],
+        "comment": "The total amount of nitrogen per unit of dry total plant mass."
+    },
+    "PlantTypicalHeight": {
+        "entities": [
+            "Plant"
+        ],
+        "characteristics": [
+            "TypicalHeight"
+        ],
+        "comment": "The shortest distance between the upper boundary of the main photosynthetic tissues on a plant and the ground level."
+    },
+    "PlantVegetativeHeight": {
+        "entities": [
+            "Plant"
+        ],
+        "characteristics": [
+            "Height"
+        ],
+        "comment": "The shortest distance between the upper boundary of the main photosynthetic tissues on a plant and the ground level."
+    },
+    "PlantVegetativeHeightNotElongated": {
+        "entities": [
+            "Plant"
+        ],
+        "characteristics": [
+            "Height"
+        ],
+        "comment": "The shortest distance between the upper boundary of the main photosynthetic tissues on a plant as it spontaneously stands and the ground level."
+    },
+    "PlantWoodiness": {
+        "entities": [
+            "Plant"
+        ],
+        "characteristics": [
+            "Woodiness"
+        ],
+        "comment": "The occurrence and distribution of wood along the stem."
+    },
+    "RootCambiumFrostHardiness": {
+        "entities": [
+            "RootCambium"
+        ],
+        "characteristics": [
+            "ToleranceToFrost"
+        ],
+        "comment": "The ability of the root cambium to withstand frost."
+    },
+    "RootDepth": {
+        "entities": [
+            "RootSystem"
+        ],
+        "characteristics": [
+            "Depth"
+        ],
+        "comment": "The depth of the longest root of a plant."
+    },
+    "RootDepthDistribution": {
+        "entities": [
+            "RootSystem"
+        ],
+        "characteristics": [
+            "Depth"
+        ],
+        "comment": "A measure of how the root biomass of an individual is distributed vertically through the soil per unit depth."
+    },
+    "RootDepthWith95percentBiomass": {
+        "entities": [
+            "RootSystem"
+        ],
+        "characteristics": [
+            "DepthAboveWhichIs95percenttBiomass"
+        ],
+        "comment": "An estimate of the depth above which 95% of the root biomass of a species is located."
+    },
+    "RootDiameter": {
+        "entities": [
+            "RootSystem"
+        ],
+        "characteristics": [
+            "Diameter"
+        ],
+        "comment": "The average diameter of roots."
+    },
+    "RootFrostHardiness": {
+        "entities": [
+            "RootSystem"
+        ],
+        "characteristics": [
+            "ToleranceToFrost"
+        ],
+        "comment": "The ability of roots to withstand frost."
+    },
+    "RootMaintenanceRespirationAtGivenTempPerMass": {
+        "entities": [
+            "RootSystem",
+            "Carbon"
+        ],
+        "characteristics": [
+            "MaintenanceRespiration"
+        ],
+        "comment": "The rate of root maintenance respiration at specified temperature expressed per unit root dry mass."
+    },
+    "RootMetamorphosis": {
+        "entities": [
+            "RootSystem"
+        ],
+        "characteristics": [
+            "Metamorphosis"
+        ],
+        "comment": "Describes any metamorphoses of roots e.g. for belowground storage."
+    },
+    "RootMycorrhizalType": {
+        "entities": [
+            "RootSystem"
+        ],
+        "characteristics": [
+            "MycorrhizalType"
+        ],
+        "comment": "The mycorrhizal type attached to the rooting system."
+    },
+    "RootNitrogenConcentrationPerMass": {
+        "entities": [
+            "RootSystem",
+            "Nitrogen"
+        ],
+        "characteristics": [
+            "Concentration"
+        ],
+        "comment": "The total amount of nitrogen per unit of dry root mass."
+    },
+    "RootRespirationAtGivenTemperaturePerArea": {
+        "entities": [
+            "RootSystem",
+            "Carbon"
+        ],
+        "characteristics": [
+            "Respiration"
+        ],
+        "comment": "The rate of root total respiration at specified temperature expressed per unit root area."
+    },
+    "RootRespirationAtGivenTemperaturePerMass": {
+        "entities": [
+            "RootSystem",
+            "Carbon"
+        ],
+        "characteristics": [
+            "Respiration"
+        ],
+        "comment": "The rate of root total respiration at specified temperature expressed per unit root dry mass."
+    },
+    "RootShootRatio": {
+        "entities": [
+            "ShootSystem",
+            "RootSystem"
+        ],
+        "characteristics": [
+            "MassRatio"
+        ],
+        "comment": "The ratio between below-ground and above-ground plant biomass."
+    },
+    "RootSpecificLength": {
+        "entities": [
+            "RootSystem"
+        ],
+        "characteristics": [
+            "SpecificLength"
+        ],
+        "comment": "The ratio of root length to root mass."
+    },
+    "RootTissueDensity": {
+        "entities": [
+            "RootTissue"
+        ],
+        "characteristics": [
+            "DensityAsMassPerVolume"
+        ],
+        "comment": "The oven-dry mass of roots divided by their volume when still fresh."
+    },
+    "RootVulnerabilityToEmbolism": {
+        "entities": [
+            "RootSystem"
+        ],
+        "characteristics": [
+            "VulnerabilityToEmbolism"
+        ],
+        "comment": "The sensitivity of the root a plant species to cavitation under highly negative water potantials."
+    },
+    "SeedDryMass": {
+        "entities": [
+            "Seed"
+        ],
+        "characteristics": [
+            "DryMass"
+        ],
+        "comment": "The oven-dry mass of a seed."
+    },
+    "SeedHeight": {
+        "entities": [
+            "Seed"
+        ],
+        "characteristics": [
+            "Height"
+        ],
+        "comment": "The third linear dimension of a seed."
+    },
+    "SeedLength": {
+        "entities": [
+            "Seed"
+        ],
+        "characteristics": [
+            "Length"
+        ],
+        "comment": "The largest linear dimension of a seed."
+    },
+    "SeedLongevity": {
+        "entities": [
+            "Seed"
+        ],
+        "characteristics": [
+            "Longevity"
+        ],
+        "comment": "The time length during which seeds persist in the soil."
+    },
+    "SeedMass": {
+        "entities": [
+            "Seed"
+        ],
+        "characteristics": [
+            "DryMass"
+        ],
+        "comment": "The air-dried mass of  a seed."
+    },
+    "SeedShape": {
+        "entities": [
+            "Seed"
+        ],
+        "characteristics": [
+            "Shape"
+        ],
+        "comment": "The variance of the three dimensions length width and height dividing each dimension by length so that length is unity."
+    },
+    "SeedWidth": {
+        "entities": [
+            "Seed"
+        ],
+        "characteristics": [
+            "Width"
+        ],
+        "comment": "The smallest linear dimension of a seed"
+    },
+    "SeedlingFrostHardiness": {
+        "entities": [
+            "PlantSeedling"
+        ],
+        "characteristics": [
+            "ToleranceToFrost"
+        ],
+        "comment": "The ability of a seedling to withstand frost."
+    },
+    "SeedlingFuncationalMorphology": {
+        "entities": [
+            "PlantSeedling"
+        ],
+        "characteristics": [
+            "FunctionalMorphology"
+        ],
+        "comment": "The morphology of seedlings in relation to cotyledons function and position."
+    },
+    "ShootCambiumFrostHardiness": {
+        "entities": [
+            "ShootCambium"
+        ],
+        "characteristics": [
+            "ToleranceToFrost"
+        ],
+        "comment": "The ability of the shoot cambium to withstand frost."
+    },
+    "ShootDiameterAt1.3m": {
+        "entities": [
+            "ShootSystem"
+        ],
+        "characteristics": [
+            "DiameterAt1.3m-DBH"
+        ],
+        "comment": "The diameter of a woody plant measured at 1.3 m above the ground."
+    },
+    "ShootFrostHardiness": {
+        "entities": [
+            "ShootSystem"
+        ],
+        "characteristics": [
+            "ToleranceToFrost"
+        ],
+        "comment": "The ability of a shoot to withstand frost."
+    },
+    "ShootVulnerabilityToEmbolism": {
+        "entities": [
+            "ShootSystem"
+        ],
+        "characteristics": [
+            "VulnerabilityToEmbolism"
+        ],
+        "comment": "The sensitivity of the shoot a plant species to cavitation under highly negative water potantials."
+    },
+    "StemFrostHardiness": {
+        "entities": [
+            "Stem"
+        ],
+        "characteristics": [
+            "ToleranceToFrost"
+        ],
+        "comment": "The ability of a stem to withstand frost."
+    },
+    "StemMaintenanceRespirationAtGivenTemperaturePerArea": {
+        "entities": [
+            "Stem",
+            "Carbon"
+        ],
+        "characteristics": [
+            "MaintenanceRespiration"
+        ],
+        "comment": "The rate of stem maintenance respiration at specified temperature expressed per unit stem area."
+    },
+    "StemMaintenanceRespirationAtGivenTemperaturePerMass": {
+        "entities": [
+            "Stem",
+            "Carbon"
+        ],
+        "characteristics": [
+            "MaintenanceRespiration"
+        ],
+        "comment": "The rate of stem maintenance respiration at specified temperature expressed per unit stem mass."
+    },
+    "StemMaintenanceRespirationAtGivenTemperaturePerNitrogen": {
+        "entities": [
+            "Carbon"
+        ],
+        "characteristics": [
+            "MaintenanceRespiration"
+        ],
+        "comment": "The rate of stem maintenance respiration at specified temperature expressed per unit stem nitrogen."
+    },
+    "StemNitrogenConcentrationPerMass": {
+        "entities": [
+            "Stem",
+            "Nitrogen"
+        ],
+        "characteristics": [
+            "Concentration"
+        ],
+        "comment": "The total amount of nitrogen per unit of dry stem mass."
+    },
+    "StemRespirationAtGivenTemperaturePerArea": {
+        "entities": [
+            "Stem",
+            "Carbon"
+        ],
+        "characteristics": [
+            "Respiration"
+        ],
+        "comment": "The rate of stem total respiration at specified temperature expressed per unit stem area."
+    },
+    "StemRespirationAtGivenTemperaturePerMass": {
+        "entities": [
+            "Stem",
+            "Carbon"
+        ],
+        "characteristics": [
+            "Respiration"
+        ],
+        "comment": "The rate of stem total respiration at specified temperature expressed per unit stem mass."
+    },
+    "StemRespirationAtGivenTemperaturePerNitrogen": {
+        "entities": [
+            "Stem",
+            "Carbon"
+        ],
+        "characteristics": [
+            "Respiration"
+        ],
+        "comment": "The rate of stem total respiration at specified temperature expressed per unit stem nitrogen."
+    },
+    "StemWoodCarbonConcentrationPerMass": {
+        "entities": [
+            "StemWood",
+            "Carbon"
+        ],
+        "characteristics": [
+            "Concentration"
+        ],
+        "comment": "The total amount of carbon per unit of dry stem mass."
+    },
+    "TwigDryMatterContent": {
+        "entities": [
+            "Twig"
+        ],
+        "characteristics": [
+            "DryMass"
+        ],
+        "comment": "The dry mass of a twig."
+    },
+    "TwigFrostHardiness": {
+        "entities": [
+            "Twig"
+        ],
+        "characteristics": [
+            "ToleranceToFrost"
+        ],
+        "comment": "The ability of a twig to withstand frost."
+    },
+    "WoodDensity": {
+        "entities": [
+            "Wood"
+        ],
+        "characteristics": [
+            "DensityAsMassPerVolume"
+        ],
+        "comment": "The oven-dry mass of a section of a plant's main stem divided by the volume of the same section when still fresh."
+    },
+    "WoodNitrogenConcentrationPerMass": {
+        "entities": [
+            "Wood",
+            "Nitrogen"
+        ],
+        "characteristics": [
+            "Concentration"
+        ],
+        "comment": "The total amount of nitrogen per unit of dry wood mass."
+    },
+    "WoodPhosphorusConcentrationPerMass": {
+        "entities": [
+            "Wood",
+            "Phosphorus"
+        ],
+        "characteristics": [
+            "Concentration"
+        ],
+        "comment": "The total amount of phosphorus per unit of wood dry mass."
+    },
+    "WoodSpecificGravity": {
+        "entities": [
+            "Wood"
+        ],
+        "characteristics": [
+            "SpecificGravity"
+        ],
+        "comment": "The specific gravity of wood."
+    },
+    "XylemSpecificHydraulicConductivity": {
+        "entities": [
+            "Xylem"
+        ],
+        "characteristics": [
+            "SpecificHydraulicConductivity"
+        ],
+        "comment": "The rate of water flow per unit cross-sectional xylem area and per unit gradient of pressure."
+    }
+}

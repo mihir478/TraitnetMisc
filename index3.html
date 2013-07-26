@@ -1,0 +1,1340 @@
+<!DOCTYPE html
+PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>Trait Registry for Plant Functional Data</title>
+	<script type="text/javascript" src="../_lib/jquery.js"></script>
+	<script type="text/javascript" src="../jquery.jstree.js"></script>
+	<script type="text/javascript" src="../_lib/jquery.cookie.js"></script>
+	<script type="text/javascript" src="../_lib/jquery.hotkeys.js"></script>
+	<script type="text/javascript" src="../_lib/jquery.ui.js"></script>
+	<script type="text/javascript" src="../_lib/jquery.widget.js"></script>
+	<script type="text/javascript" src="../_lib/jquery.position.js"></script>
+	<script type="text/javascript" src="../_lib/jquery.tooltip.js"></script>
+	<link rel="stylesheet" href="../themes/default/style.css" />
+	<link type="text/css" rel="stylesheet" href="../_docs/syntax/!style.css"/>
+	<link type="text/css" rel="stylesheet" href="../_docs/!style.css"/>
+    <link type="text/css" rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.5/themes/start/jquery-ui.css" />
+	<script type="text/javascript" src="../_docs/syntax/!script.js"></script>
+	<script type="text/javascript" src="search.js"></script> 
+	<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.5/jquery-ui.min.js"></script>
+</head>
+<body>
+<style type="text/css">
+.jstree-classic .jstree-open > a .jstree-icon { background-position:-56px -19px; }
+</style>
+	<script type="text/javascript" class="source below">
+// Note method 2) and 3) use `one`, this is because if `refresh` is called those events are triggered
+var entity="", charac="";
+$(document).ready(function(){
+	$("#entities")
+		.jstree({ "plugins" : ["themes","html_data","ui", "core"], "themes" : { "theme" : "classic" } }).bind("select_node.jstree", function (event, data) {
+            // `data.rslt.obj` is the jquery extended node that was clicked
+            entity = data.rslt.obj.attr("id");
+			if(entity == "Entity") {
+				entity = "";
+				$("#entities").jstree("toggle_node","#Entity");
+			}
+   			relTraits();
+		});
+		// 1) the loaded event fires as soon as data is parsed and inserted
+	$("#characteristics")
+		.jstree({ "plugins" : ["themes","html_data","ui", "core"], "themes" : { "theme" : "classic" }  }).bind("select_node.jstree", function (event, data) {
+            // `data.rslt.obj` is the jquery extended node that was clicked
+            charac = data.rslt.obj.attr("id");
+            if(charac == "PhysicalCharacteristic") {
+				charac = "";
+				$("#characteristics").jstree("toggle_node","#PhysicalCharacteristic");
+			}
+   			relTraits();
+		});
+	// 1) the loaded event fires as soon as data is parsed and inserted
+	$("#traits")
+		.jstree({ "plugins" : ["themes","html_data","ui","crrm"], "themes" : { "theme" : "classic" } }).bind("select_node.jstree", function (event, data) {
+			var name = $("a", data.rslt.obj).html();
+			name = name.substring(name.lastIndexOf('>') + 1);
+			$("#label").val("Search for " + name);
+			$("input[type=anyfield]").val(name + " Traitnet Registry");
+		});
+		// 1) the loaded event fires as soon as data is parsed and inserted
+	$("#searchForm").submit(function(){
+		$.post("http://knb.ecoinformatics.org/knb/metacat", $("#searchForm").serialize(), function(d){
+			$("#modal").html(process(d));
+			$("#modal").dialog({modal: true});
+		});
+		return false;
+	});
+	$("#label").button();
+	$("#about").button();
+	$("#main").tooltip();
+});
+ function relTraits() {   			
+   		
+		$("#traits").jstree("remove","#Relevant_Traits li");
+		
+   		$.getJSON('ontfiles/traits.json', function(data) {
+			
+  			$.each(data, function(key, val) {
+				
+				if(entity.length > 0 && charac.length > 0) {
+					if(val.toString().indexOf(entity) != -1 && val.toString().indexOf(charac) != -1)
+						$("#traits").jstree("create","#Relevant_Traits",false,key,false,true);
+				}
+				
+				if(charac.length > 0 && entity == "") {
+					if(val.toString().indexOf(charac) != -1) 
+						$("#traits").jstree("create","#Relevant_Traits",false,key,false,true);
+				}
+				
+    			if(entity.length > 0 && charac == "") {
+					if(val.toString().indexOf(entity) != -1) 
+						$("#traits").jstree("create","#Relevant_Traits",false,key,false,true);
+				}
+  			});
+		});
+   };
+function displaymessage() {
+	$("#message").dialog({ width: 800, height: 500 });
+};
+</script>
+<div id = "message" title="About" style="display:none">
+<h2>Motivation</h2>
+<p>Discovering trait data resources is a time consuming and daunting task. TraitNet is an NSF-funded Research Coordination Network whose goal is to facilitate trait-based research by fostering the curation, discovery, and sharing of trait data. As a first step towards the goal of an integrated system that will allow for cradle-to-eternity data curation, TraitNet has developed this Registry for Plant Functional Trait Data. The goals of the TraitNet Data Registry are to enable the discovery of plant trait data and help link data owners with potential collaborators and data consumers.</p>
+
+<h2>Goal</h2>
+<p>The TraitNet Data Registry allows data consumers to search for data sources via an interface that leverages the Plant Trait Ontology (PLATON), developed in collaboration with CEFE (Montpellier, France) and NCEAS (Santa Barbara, USA). The foundation of PLATON is NCEAS’ Extensible Observation Ontology (OBOE). OBOE decomposes traits into entities (e.g., leaves, shoot, wood) upon which characteristics (e.g., height, weight, tolerance to drought) are measured. This approach enables a user to search for traits via entity, characteristic, or both, or via the traits themselves. Entities are organized hierarchically within a plant partonomy using the relations isPartOf (e.g., leaf isPartOf branch, which isPartOf shoot) and isA (e.g., stemwood isA wood). Characteristics can be searched via a class/subclass hierarchy via isA (e.g., maintenance_respiration isA respiration_characteristic). Searches on entities and characteristics can be combined, or a combination of an entity and a characteristic (e.g., leaf maintenance respiration).<p> 
+
+<h2>Who are we?</h2>
+<p>Mihir Sanghavi, NJIT, Newark, has developed this TraitNet Data Registry under the guidance of Farshid Ahrestani, Columbia University, New York, and Daniel E. Bunker, NJIT, Newark. This project would not have been possible without the insight, guidance and technical input of the following people: Shahid Naeem, Mark Schildhauer, Ben Leinfelder, and Shawn Bowers. The National Science Foundation (grant #0639161) supports TraitNet.</p> 
+
+<h2>What you can do?</h2>
+<p>Data owners who wish to share their data can register their data sets by completing the  TraitNet Data Registry Metadata Form and emailing it to traitnet [at] gmail [dot] com. Registering your dataset does not require making your dataset freely available. Searches that lead to your dataset will disclose the contact information you provide for the dataset, allowing data consumers to contact you to propose collaboration or request the use of your data. You are, however, under no obligation to do so. We hope you will join us in our effort to facilitate data discovery, re-use, and collaboration. The usefulness of the Registry is positively related to the number of datasets included in the Registry.</p> 
+
+<p>Contact TraitNet</p>
+</div>
+
+<div style="clear:both; text-align:center">
+	<button id ="about" type="button" onclick="displaymessage()">About</button>
+</div>
+<span style="display: block; color: white; text-align: center; font-size: 30px;">TraitNet Registry for Plant Functional Trait Data</span>
+
+<div id="main" style= "width:1080px; margin:auto">
+	<div id="modal" style="display: none"></div>
+	<div class="searchbox" style="clear:both; text-align:center">
+		<form action="search.php" id="searchForm" method="post" target="_top">
+			<input type="hidden" name="operator"      value="UNION"\>
+			<input type="hidden" name="action"        value="query"\>
+			<input type="hidden" name="qformat"       value="knb"\>
+			<input type="hidden" name="returnfield"   value="originator/individualName/surName"\>
+			<input type="hidden" name="returnfield"   value="originator/individualName/givenName"\>
+			<input type="hidden" name="returnfield"   value="originator/organizationName"\>
+			<input type="hidden" name="returnfield"   value="creator/individualName/surName"\>
+			<input type="hidden" name="returnfield"   value="creator/organizationName"\>
+			<input type="hidden" name="returnfield"   value="dataset/title"\>
+			<input type="hidden" name="returnfield"   value="keyword"\>
+			<input type="hidden" name="returnfield"   value="idinfo/citation/citeinfo/title"\>
+			<input type="hidden" name="returnfield"   value="idinfo/citation/citeinfo/origin"\>
+			<input type="hidden" name="returnfield"   value="idinfo/keywords/theme/themekey"\>
+			<input type="hidden" name="returndoctype" value="-//ecoinformatics.org//eml-dataset-2.0.0beta6//EN"\>
+			<input type="hidden" name="returndoctype" value="-//ecoinformatics.org//eml-dataset-2.0.0beta4//EN"\>
+			<input type="hidden" name="returndoctype" value="eml://ecoinformatics.org/eml-2.1.0"\>
+			<input type="hidden" name="returndoctype" value="eml://ecoinformatics.org/eml-2.0.1"\>
+			<input type="hidden" name="returndoctype" value="eml://ecoinformatics.org/eml-2.0.0"\>
+			<input type="hidden" name="returndoctype" value="metadata"\>
+			<input type="hidden" name="returndoctype" value="-//NCEAS//eml-dataset-2.0//EN"\>
+			<input type="hidden" name="returndoctype" value="-//NCEAS//resource//EN"\>
+			<input size="30" maxlength="300" name="anyfield" type="hidden" id="searchBox">
+			<input value="Search" type="submit" id="label"/>
+		</form>
+	</div>
+	
+<div id="entities" style="float:left; margin: 1% 1% 1% 2%;">
+
+<!-- entity tree -->
+
+<ul>
+<li id="Entity">
+<a href='#' title="...">Entity</a>
+<ul>
+<li id="Plant">
+<a href='#'>Plant</a>
+<ul>
+<li id="PlantSapling">
+<a href='#'>PlantSapling</a>
+</li>
+<li id="PlantSeedling">
+<a href='#'>PlantSeedling</a>
+</li>
+<li id="PlantResprout">
+<a href='#'>PlantResprout</a>
+</li>
+<li id="PartOfPlant">
+<a href='#'>PartOfPlant</a>
+<ul>
+<li id="PlantOrgan">
+<a href='#'>PlantOrgan</a>
+<ul>
+<li id="Branch">
+<a href='#'>Branch</a>
+<ul>
+<li id="BranchWood">
+<a href='#'>BranchWood</a>
+</li>
+<li id="Twig">
+<a href='#'>Twig</a>
+<ul>
+<li id="Bark">
+<a href='#'>Bark</a>
+</li>
+</ul>
+</li>
+<li id="Bark">
+<a href='#'>Bark</a>
+</li>
+<li id="Leaf">
+<a href='#'>Leaf</a>
+<ul>
+<li id="LeafVascularBundle">
+<a href='#'>LeafVascularBundle</a>
+</li>
+<li id="LeafMitochondria">
+<a href='#'>LeafMitochondria</a>
+</li>
+<li id="Leaflet">
+<a href='#'>Leaflet</a>
+</li>
+<li id="LeafFirstAxis">
+<a href='#'>LeafFirstAxis</a>
+</li>
+<li id="LeafCell">
+<a href='#'>LeafCell</a>
+<ul>
+<li id="LeafLaminaCell">
+<a href='#'>LeafLaminaCell</a>
+</li>
+<li id="LeafEpidermisCell">
+<a href='#'>LeafEpidermisCell</a>
+</li>
+<li id="LeafMesophyllCell">
+<a href='#'>LeafMesophyllCell</a>
+</li>
+</ul>
+</li>
+<li id="LeafLongestAxis">
+<a href='#'>LeafLongestAxis</a>
+</li>
+<li id="LeafBlade">
+<a href='#'>LeafBlade</a>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li id="LeafFirstAxis">
+<a href='#'>LeafFirstAxis</a>
+</li>
+<li id="Leaflet">
+<a href='#'>Leaflet</a>
+</li>
+<li id="Stem">
+<a href='#'>Stem</a>
+<ul>
+<li id="StemWood">
+<a href='#'>StemWood</a>
+</li>
+<li id="Bark">
+<a href='#'>Bark</a>
+</li>
+</ul>
+</li>
+<li id="Flower">
+<a href='#'>Flower</a>
+</li>
+<li id="Seed">
+<a href='#'>Seed</a>
+</li>
+<li id="Bud">
+<a href='#'>Bud</a>
+</li>
+<li id="LeafLongestAxis">
+<a href='#'>LeafLongestAxis</a>
+</li>
+<li id="Leaf">
+<a href='#'>Leaf</a>
+<ul>
+<li id="LeafVascularBundle">
+<a href='#'>LeafVascularBundle</a>
+</li>
+<li id="LeafMitochondria">
+<a href='#'>LeafMitochondria</a>
+</li>
+<li id="Leaflet">
+<a href='#'>Leaflet</a>
+</li>
+<li id="LeafFirstAxis">
+<a href='#'>LeafFirstAxis</a>
+</li>
+<li id="LeafCell">
+<a href='#'>LeafCell</a>
+<ul>
+<li id="LeafLaminaCell">
+<a href='#'>LeafLaminaCell</a>
+</li>
+<li id="LeafEpidermisCell">
+<a href='#'>LeafEpidermisCell</a>
+</li>
+<li id="LeafMesophyllCell">
+<a href='#'>LeafMesophyllCell</a>
+</li>
+</ul>
+</li>
+<li id="LeafLongestAxis">
+<a href='#'>LeafLongestAxis</a>
+</li>
+<li id="LeafBlade">
+<a href='#'>LeafBlade</a>
+</li>
+</ul>
+</li>
+<li id="Petiole">
+<a href='#'>Petiole</a>
+</li>
+<li id="Root">
+<a href='#'>Root</a>
+<ul>
+<li id="MycorrhizalType">
+<a href='#'>MycorrhizalType</a>
+</li>
+<li id="CoarseRoot">
+<a href='#'>CoarseRoot</a>
+</li>
+<li id="RootTissue">
+<a href='#'>RootTissue</a>
+</li>
+<li id="RootDepthWith95perctOfRootBiomass">
+<a href='#'>RootDepthWith95perctOfRootBiomass</a>
+</li>
+<li id="FineRoot">
+<a href='#'>FineRoot</a>
+</li>
+</ul>
+</li>
+<li id="Twig">
+<a href='#'>Twig</a>
+<ul>
+<li id="Bark">
+<a href='#'>Bark</a>
+</li>
+</ul>
+</li>
+<li id="Dispersule">
+<a href='#'>Dispersule</a>
+</li>
+<li id="Shoot">
+<a href='#'>Shoot</a>
+<ul>
+<li id="Branch">
+<a href='#'>Branch</a>
+<ul>
+<li id="BranchWood">
+<a href='#'>BranchWood</a>
+</li>
+<li id="Twig">
+<a href='#'>Twig</a>
+<ul>
+<li id="Bark">
+<a href='#'>Bark</a>
+</li>
+</ul>
+</li>
+<li id="Bark">
+<a href='#'>Bark</a>
+</li>
+<li id="Leaf">
+<a href='#'>Leaf</a>
+<ul>
+<li id="LeafVascularBundle">
+<a href='#'>LeafVascularBundle</a>
+</li>
+<li id="LeafMitochondria">
+<a href='#'>LeafMitochondria</a>
+</li>
+<li id="Leaflet">
+<a href='#'>Leaflet</a>
+</li>
+<li id="LeafFirstAxis">
+<a href='#'>LeafFirstAxis</a>
+</li>
+<li id="LeafCell">
+<a href='#'>LeafCell</a>
+<ul>
+<li id="LeafLaminaCell">
+<a href='#'>LeafLaminaCell</a>
+</li>
+<li id="LeafEpidermisCell">
+<a href='#'>LeafEpidermisCell</a>
+</li>
+<li id="LeafMesophyllCell">
+<a href='#'>LeafMesophyllCell</a>
+</li>
+</ul>
+</li>
+<li id="LeafLongestAxis">
+<a href='#'>LeafLongestAxis</a>
+</li>
+<li id="LeafBlade">
+<a href='#'>LeafBlade</a>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li id="LeafFirstAxis">
+<a href='#'>LeafFirstAxis</a>
+</li>
+<li id="Leaflet">
+<a href='#'>Leaflet</a>
+</li>
+<li id="Stem">
+<a href='#'>Stem</a>
+<ul>
+<li id="StemWood">
+<a href='#'>StemWood</a>
+</li>
+<li id="Bark">
+<a href='#'>Bark</a>
+</li>
+</ul>
+</li>
+<li id="Flower">
+<a href='#'>Flower</a>
+</li>
+<li id="Seed">
+<a href='#'>Seed</a>
+</li>
+<li id="Wood">
+<a href='#'>Wood</a>
+<ul>
+<li id="BranchWood">
+<a href='#'>BranchWood</a>
+</li>
+<li id="StemWood">
+<a href='#'>StemWood</a>
+</li>
+<li id="SapWood">
+<a href='#'>SapWood</a>
+</li>
+</ul>
+</li>
+<li id="Bud">
+<a href='#'>Bud</a>
+</li>
+<li id="ShootCambium">
+<a href='#'>ShootCambium</a>
+</li>
+<li id="Bark">
+<a href='#'>Bark</a>
+</li>
+<li id="LeafLongestAxis">
+<a href='#'>LeafLongestAxis</a>
+</li>
+<li id="Leaf">
+<a href='#'>Leaf</a>
+<ul>
+<li id="LeafVascularBundle">
+<a href='#'>LeafVascularBundle</a>
+</li>
+<li id="LeafMitochondria">
+<a href='#'>LeafMitochondria</a>
+</li>
+<li id="Leaflet">
+<a href='#'>Leaflet</a>
+</li>
+<li id="LeafFirstAxis">
+<a href='#'>LeafFirstAxis</a>
+</li>
+<li id="LeafCell">
+<a href='#'>LeafCell</a>
+<ul>
+<li id="LeafLaminaCell">
+<a href='#'>LeafLaminaCell</a>
+</li>
+<li id="LeafEpidermisCell">
+<a href='#'>LeafEpidermisCell</a>
+</li>
+<li id="LeafMesophyllCell">
+<a href='#'>LeafMesophyllCell</a>
+</li>
+</ul>
+</li>
+<li id="LeafLongestAxis">
+<a href='#'>LeafLongestAxis</a>
+</li>
+<li id="LeafBlade">
+<a href='#'>LeafBlade</a>
+</li>
+</ul>
+</li>
+<li id="Petiole">
+<a href='#'>Petiole</a>
+</li>
+<li id="Twig">
+<a href='#'>Twig</a>
+<ul>
+<li id="Bark">
+<a href='#'>Bark</a>
+</li>
+</ul>
+</li>
+<li id="Dispersule">
+<a href='#'>Dispersule</a>
+</li>
+<li id="LeafBlade">
+<a href='#'>LeafBlade</a>
+</li>
+<li id="Cotyledon">
+<a href='#'>Cotyledon</a>
+</li>
+</ul>
+</li>
+<li id="LeafBlade">
+<a href='#'>LeafBlade</a>
+</li>
+<li id="Cotyledon">
+<a href='#'>Cotyledon</a>
+</li>
+</ul>
+</li>
+<li id="PlantCell">
+<a href='#'>PlantCell</a>
+<ul>
+<li id="ParenchymaCell">
+<a href='#'>ParenchymaCell</a>
+</li>
+<li id="EpidermisCell">
+<a href='#'>EpidermisCell</a>
+</li>
+<li id="LeafCell">
+<a href='#'>LeafCell</a>
+<ul>
+<li id="LeafLaminaCell">
+<a href='#'>LeafLaminaCell</a>
+</li>
+<li id="LeafEpidermisCell">
+<a href='#'>LeafEpidermisCell</a>
+</li>
+<li id="LeafMesophyllCell">
+<a href='#'>LeafMesophyllCell</a>
+</li>
+</ul>
+</li>
+<li id="XylemCell">
+<a href='#'>XylemCell</a>
+</li>
+<li id="SclerenchymaCell">
+<a href='#'>SclerenchymaCell</a>
+</li>
+<li id="PhloemCell">
+<a href='#'>PhloemCell</a>
+</li>
+</ul>
+</li>
+<li id="PlantTissue">
+<a href='#'>PlantTissue</a>
+<ul>
+<li id="LeafVascularBundle">
+<a href='#'>LeafVascularBundle</a>
+</li>
+<li id="Epidermis">
+<a href='#'>Epidermis</a>
+</li>
+<li id="RootCambium">
+<a href='#'>RootCambium</a>
+</li>
+<li id="Xylem">
+<a href='#'>Xylem</a>
+</li>
+<li id="ConduitLumen">
+<a href='#'>ConduitLumen</a>
+</li>
+<li id="Wood">
+<a href='#'>Wood</a>
+<ul>
+<li id="BranchWood">
+<a href='#'>BranchWood</a>
+</li>
+<li id="StemWood">
+<a href='#'>StemWood</a>
+</li>
+<li id="SapWood">
+<a href='#'>SapWood</a>
+</li>
+</ul>
+</li>
+<li id="RootTissue">
+<a href='#'>RootTissue</a>
+</li>
+<li id="ShootCambium">
+<a href='#'>ShootCambium</a>
+</li>
+<li id="Phloem">
+<a href='#'>Phloem</a>
+</li>
+<li id="Bark">
+<a href='#'>Bark</a>
+</li>
+<li id="Conduit">
+<a href='#'>Conduit</a>
+</li>
+</ul>
+</li>
+<li id="PartOfPlantCell">
+<a href='#'>PartOfPlantCell</a>
+<ul>
+<li id="Mitochondria">
+<a href='#'>Mitochondria</a>
+<ul>
+<li id="LeafMitochondria">
+<a href='#'>LeafMitochondria</a>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li id="Substance">
+<a href='#'>Substance</a>
+<ul>
+<li id="Elemental">
+<a href='#'>Elemental</a>
+<ul>
+<li id="Sulpher">
+<a href='#'>Sulpher</a>
+</li>
+<li id="Carbon">
+<a href='#'>Carbon</a>
+</li>
+<li id="Phosphorus">
+<a href='#'>Phosphorus</a>
+</li>
+<li id="Potassium">
+<a href='#'>Potassium</a>
+</li>
+<li id="NitrogenDelta15">
+<a href='#'>NitrogenDelta15</a>
+</li>
+<li id="Hydrogen">
+<a href='#'>Hydrogen</a>
+</li>
+<li id="CarbonDelta13">
+<a href='#'>CarbonDelta13</a>
+</li>
+<li id="Nitrogen">
+<a href='#'>Nitrogen</a>
+</li>
+</ul>
+</li>
+<li id="Compuound">
+<a href='#'>Compuound</a>
+<ul>
+<li id="Ash">
+<a href='#'>Ash</a>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<!-- entity tree -->
+</div>
+
+
+<div id="characteristics" style="float:left; margin: 1% 1% 1% 2%">
+
+<!-- characteristics -->
+
+
+<ul>
+<li id="PhysicalCharacteristic">
+<a href='#'>PhysicalCharacteristic</a>
+<ul>
+<li id="Abaxial">
+<a href='#'>Abaxial</a>
+</li>
+<li id="Absorbance">
+<a href='#'>Absorbance</a>
+</li>
+<li id="Clonality">
+<a href='#'>Clonality</a>
+</li>
+<li id="Compoundness">
+<a href='#'>Compoundness</a>
+</li>
+<li id="Concentration">
+<a href='#'>Concentration</a>
+</li>
+<li id="Density">
+<a href='#'>Density</a>
+<ul>
+<li id="DensityAsMassPerVolume">
+<a href='#'>DensityAsMassPerVolume</a>
+</li>
+<li id="DensityAsNumberPerArea">
+<a href='#'>DensityAsNumberPerArea</a>
+</li>
+</ul>
+</li>
+<li id="Depth">
+<a href='#'>Depth</a>
+<ul>
+<li id="DepthAboveWhichIs95perctBiomass">
+<a href='#'>DepthAboveWhichIs95perctBiomass</a>
+</li>
+</ul>
+</li>
+<li id="DepthDistribution">
+<a href='#'>DepthDistribution</a>
+</li>
+<li id="Diameter">
+<a href='#'>Diameter</a>
+<ul>
+<li id="DiameterAt1.3m(DBH)">
+<a href='#'>DiameterAt1.3m(DBH)</a>
+</li>
+</ul>
+</li>
+<li id="DispersalSyndrom">
+<a href='#'>DispersalSyndrom</a>
+</li>
+<li id="Flammability">
+<a href='#'>Flammability</a>
+</li>
+<li id="GerminationSimulation">
+<a href='#'>GerminationSimulation</a>
+<ul>
+<li id="GerminationSimulationByDigestion">
+<a href='#'>GerminationSimulationByDigestion</a>
+</li>
+</ul>
+</li>
+<li id="GrowthForm">
+<a href='#'>GrowthForm</a>
+</li>
+<li id="Height">
+<a href='#'>Height</a>
+<ul>
+<li id="HeightAt20Years">
+<a href='#'>HeightAt20Years</a>
+</li>
+<li id="HeightAtInflorescenceTop">
+<a href='#'>HeightAtInflorescenceTop</a>
+</li>
+<li id="HeightAtReleasing">
+<a href='#'>HeightAtReleasing</a>
+</li>
+<li id="HeightWithHighestLeafElongated">
+<a href='#'>HeightWithHighestLeafElongated</a>
+</li>
+<li id="HeightWithHighestLeafNotElongated">
+<a href='#'>HeightWithHighestLeafNotElongated</a>
+</li>
+<li id="MaximumHeight">
+<a href='#'>MaximumHeight</a>
+</li>
+<li id="TypicalHeight">
+<a href='#'>TypicalHeight</a>
+</li>
+</ul>
+</li>
+<li id="LifeForm-Raunkiaer">
+<a href='#'>LifeForm-Raunkiaer</a>
+</li>
+<li id="MassPerArea">
+<a href='#'>MassPerArea</a>
+</li>
+<li id="Metamorphosis">
+<a href='#'>Metamorphosis</a>
+</li>
+<li id="Molarity">
+<a href='#'>Molarity</a>
+</li>
+<li id="Morphology">
+<a href='#'>Morphology</a>
+<ul>
+<li id="BranchingArchitecture">
+<a href='#'>BranchingArchitecture</a>
+</li>
+<li id="FunctionalMorphology">
+<a href='#'>FunctionalMorphology</a>
+</li>
+</ul>
+</li>
+<li id="MultiStemness">
+<a href='#'>MultiStemness</a>
+</li>
+<li id="PerpendicularToFirstAxis">
+<a href='#'>PerpendicularToFirstAxis</a>
+</li>
+<li id="Physiology">
+<a href='#'>Physiology</a>
+<ul>
+<li id="Flux">
+<a href='#'>Flux</a>
+<ul>
+<li id="BiomassFlux">
+<a href='#'>BiomassFlux</a>
+<ul>
+<li id="Decomposition">
+<a href='#'>Decomposition</a>
+</li>
+</ul>
+</li>
+<li id="NitrogenFixationCapacity">
+<a href='#'>NitrogenFixationCapacity</a>
+</li>
+<li id="NutrientUptakeStrategy">
+<a href='#'>NutrientUptakeStrategy</a>
+</li>
+<li id="Photosynthesis">
+<a href='#'>Photosynthesis</a>
+<ul>
+<li id="CarboxylationCapacity">
+<a href='#'>CarboxylationCapacity</a>
+<ul>
+<li id="MaximumCarboxylationCapacity">
+<a href='#'>MaximumCarboxylationCapacity</a>
+</li>
+</ul>
+</li>
+<li id="PhotosyntheticPathway">
+<a href='#'>PhotosyntheticPathway</a>
+</li>
+<li id="RateOfElectronTransport">
+<a href='#'>RateOfElectronTransport</a>
+<ul>
+<li id="MaximumRateOfElectonTransport">
+<a href='#'>MaximumRateOfElectonTransport</a>
+<ul>
+<li id="MaximumRateOfElectronTransportPerArea">
+<a href='#'>MaximumRateOfElectronTransportPerArea</a>
+</li>
+<li id="MaximumRateOfElectronTransportPerMass">
+<a href='#'>MaximumRateOfElectronTransportPerMass</a>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li id="RateOfPhotosynthesis">
+<a href='#'>RateOfPhotosynthesis</a>
+</li>
+</ul>
+</li>
+<li id="Respiration">
+<a href='#'>Respiration</a>
+<ul>
+<li id="MaintenanceRespiration">
+<a href='#'>MaintenanceRespiration</a>
+</li>
+<li id="RespirationAt25oC">
+<a href='#'>RespirationAt25oC</a>
+</li>
+<li id="RespirationAtGrowthTemperature">
+<a href='#'>RespirationAtGrowthTemperature</a>
+</li>
+</ul>
+</li>
+<li id="StomatalConductance">
+<a href='#'>StomatalConductance</a>
+</li>
+<li id="WaterFlux">
+<a href='#'>WaterFlux</a>
+<ul>
+<li id="Transpiration">
+<a href='#'>Transpiration</a>
+</li>
+<li id="WaterPotential">
+<a href='#'>WaterPotential</a>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li id="PollinationSyndrom">
+<a href='#'>PollinationSyndrom</a>
+</li>
+<li id="Shape">
+<a href='#'>Shape</a>
+</li>
+<li id="Spinscence">
+<a href='#'>Spinscence</a>
+</li>
+<li id="Thickness">
+<a href='#'>Thickness</a>
+</li>
+<li id="Tolerance">
+<a href='#'>Tolerance</a>
+<ul>
+<li id="AbioticTolerance">
+<a href='#'>AbioticTolerance</a>
+<ul>
+<li id="ToleranceToFire">
+<a href='#'>ToleranceToFire</a>
+</li>
+<li id="ToleranceToLight">
+<a href='#'>ToleranceToLight</a>
+<ul>
+<li id="ToleranceToHighLight">
+<a href='#'>ToleranceToHighLight</a>
+</li>
+<li id="ToleranceToLowLight">
+<a href='#'>ToleranceToLowLight</a>
+</li>
+<li id="ToleranceToShade">
+<a href='#'>ToleranceToShade</a>
+</li>
+</ul>
+</li>
+<li id="ToleranceToSalinity">
+<a href='#'>ToleranceToSalinity</a>
+</li>
+<li id="ToleranceToTemperature">
+<a href='#'>ToleranceToTemperature</a>
+<ul>
+<li id="ToleranceToFrost">
+<a href='#'>ToleranceToFrost</a>
+</li>
+<li id="ToleranceToHeat">
+<a href='#'>ToleranceToHeat</a>
+</li>
+</ul>
+</li>
+<li id="ToleranceToWater">
+<a href='#'>ToleranceToWater</a>
+<ul>
+<li id="ToleranceToDrought">
+<a href='#'>ToleranceToDrought</a>
+</li>
+<li id="ToleranceToFlood">
+<a href='#'>ToleranceToFlood</a>
+</li>
+</ul>
+</li>
+<li id="ToleranceToWindthrow">
+<a href='#'>ToleranceToWindthrow</a>
+</li>
+</ul>
+</li>
+<li id="BioticTolerance">
+<a href='#'>BioticTolerance</a>
+<ul>
+<li id="Palatability">
+<a href='#'>Palatability</a>
+</li>
+<li id="ResproutingCapacity">
+<a href='#'>ResproutingCapacity</a>
+<ul>
+<li id="ResproutingCapacityAfterClipping">
+<a href='#'>ResproutingCapacityAfterClipping</a>
+</li>
+<li id="ResproutingCapacityAfterDisturbance">
+<a href='#'>ResproutingCapacityAfterDisturbance</a>
+</li>
+<li id="ResproutingCapacityAfterFire">
+<a href='#'>ResproutingCapacityAfterFire</a>
+</li>
+</ul>
+</li>
+<li id="Strength">
+<a href='#'>Strength</a>
+<ul>
+<li id="Puncturability">
+<a href='#'>Puncturability</a>
+</li>
+<li id="ResistanceToFracture">
+<a href='#'>ResistanceToFracture</a>
+</li>
+<li id="Sclerophylly">
+<a href='#'>Sclerophylly</a>
+</li>
+<li id="SurfaceToughness">
+<a href='#'>SurfaceToughness</a>
+</li>
+<li id="TensileResistance">
+<a href='#'>TensileResistance</a>
+</li>
+<li id="TensileStrength">
+<a href='#'>TensileStrength</a>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li id="Width">
+<a href='#'>Width</a>
+</li>
+<li id="Woodiness">
+<a href='#'>Woodiness</a>
+</li>
+<li id="pH">
+<a href='#'>pH</a>
+</li>
+</ul>
+</li>
+</ul>
+
+<!-- char Tree -->
+</div>
+
+<div id = "traits" style="float:left; margin:  1% 1% 1% 2%;">
+<ul> 
+<li id="All_Traits">
+ <a href='#'>All_Traits</a>
+<ul>
+ <li id="95percentRootingDepth">
+<a href='#'>95percentRootingDepth</a>
+ <li id="AgeOfMaturityOfResprouts">
+<a href='#'>AgeOfMaturityOfResprouts</a>
+ <li id="AgeOfMaturityOfSaplings">
+<a href='#'>AgeOfMaturityOfSaplings</a>
+ <li id="BarkNitrogenConcentration_Mass">
+<a href='#'>BarkNitrogenConcentration_Mass</a>
+ <li id="BarkPhosphorusConcentration_Mass">
+<a href='#'>BarkPhosphorusConcentration_Mass</a>
+ <li id="BarkThickness">
+<a href='#'>BarkThickness</a>
+ <li id="BranchMaintenanceRespirationAtGivenTemperature_Area">
+<a href='#'>BranchMaintenanceRespirationAtGivenTemperature_Area</a>
+ <li id="BranchMaintenanceRespirationAtGivenTemperature_Mass">
+<a href='#'>BranchMaintenanceRespirationAtGivenTemperature_Mass</a>
+ <li id="BranchNitrogenConcentration_Mass">
+<a href='#'>BranchNitrogenConcentration_Mass</a>
+ <li id="BranchTotalRespirationAtGivenTemperature_Area">
+<a href='#'>BranchTotalRespirationAtGivenTemperature_Area</a>
+ <li id="BranchTotalRespirationAtGivenTemperature_Mass">
+<a href='#'>BranchTotalRespirationAtGivenTemperature_Mass</a>
+ <li id="BranchWoodCarbonConcentration_Mass">
+<a href='#'>BranchWoodCarbonConcentration_Mass</a>
+ <li id="CoarseRootCarbonConcentration_Mass">
+<a href='#'>CoarseRootCarbonConcentration_Mass</a>
+ <li id="CoarseRootPhosphorusConcentration_Mass">
+<a href='#'>CoarseRootPhosphorusConcentration_Mass</a>
+ <li id="ConduitArea">
+<a href='#'>ConduitArea</a>
+ <li id="ConduitDensity">
+<a href='#'>ConduitDensity</a>
+ <li id="CotyledonNitrogenConcentration_Mass">
+<a href='#'>CotyledonNitrogenConcentration_Mass</a>
+ <li id="DispersuleHeight">
+<a href='#'>DispersuleHeight</a>
+ <li id="DispersuleLength">
+<a href='#'>DispersuleLength</a>
+ <li id="DispersuleShape">
+<a href='#'>DispersuleShape</a>
+ <li id="DispersuleWidth">
+<a href='#'>DispersuleWidth</a>
+ <li id="FineRootFrostHardiness">
+<a href='#'>FineRootFrostHardiness</a>
+ <li id="FineRootNitrogenConcentration_Mass">
+<a href='#'>FineRootNitrogenConcentration_Mass</a>
+ <li id="FloweringPlantHeightWithHighestLeaf">
+<a href='#'>FloweringPlantHeightWithHighestLeaf</a>
+ <li id="FloweringPlantHeightWithHighestLeafNot">
+<a href='#'>FloweringPlantHeightWithHighestLeafNot</a>
+ <li id="JMaxAtAmbientTemperature_Area">
+<a href='#'>JMaxAtAmbientTemperature_Area</a>
+ <li id="JMaxAtAmbientTemperature_Mass">
+<a href='#'>JMaxAtAmbientTemperature_Mass</a>
+ <li id="LeafAbsorbance">
+<a href='#'>LeafAbsorbance</a>
+ <li id="LeafAngle">
+<a href='#'>LeafAngle</a>
+ <li id="LeafArea">
+<a href='#'>LeafArea</a>
+ <li id="LeafArea_SapwoodArea">
+<a href='#'>LeafArea_SapwoodArea</a>
+ <li id="LeafBladeLength">
+<a href='#'>LeafBladeLength</a>
+ <li id="LeafBladeWidth">
+<a href='#'>LeafBladeWidth</a>
+ <li id="LeafCarbonContent_Area">
+<a href='#'>LeafCarbonContent_Area</a>
+ <li id="LeafCarbonContent_Mass">
+<a href='#'>LeafCarbonContent_Mass</a>
+ <li id="LeafCompoundness">
+<a href='#'>LeafCompoundness</a>
+ <li id="LeafDealta13">
+<a href='#'>LeafDealta13</a>
+ <li id="LeafDryMatterContent">
+<a href='#'>LeafDryMatterContent</a>
+ <li id="Leaf">
+<a href='#'>Leaf</a>
+ <li id="LeafFrostHardiness">
+<a href='#'>LeafFrostHardiness</a>
+ <li id="LeafLaminaCellSizeAbaxial">
+<a href='#'>LeafLaminaCellSizeAbaxial</a>
+ <li id="LeafLifespan">
+<a href='#'>LeafLifespan</a>
+ <li id="LeafLminaCellPalissadeParenchyma_Area">
+<a href='#'>LeafLminaCellPalissadeParenchyma_Area</a>
+ <li id="LeafMaintenanceRespirationAtGivenTemperature_Area">
+<a href='#'>LeafMaintenanceRespirationAtGivenTemperature_Area</a>
+ <li id="LeafMass_Area">
+<a href='#'>LeafMass_Area</a>
+ <li id="LeafMesophyllCellSize_Area">
+<a href='#'>LeafMesophyllCellSize_Area</a>
+ <li id="LeafMesophyllCellSize_Height">
+<a href='#'>LeafMesophyllCellSize_Height</a>
+ <li id="LeafNitrogenConcentration_Area">
+<a href='#'>LeafNitrogenConcentration_Area</a>
+ <li id="LeafNitrogenConcentration_Mass">
+<a href='#'>LeafNitrogenConcentration_Mass</a>
+ <li id="LeafNumber_UnitShootLength">
+<a href='#'>LeafNumber_UnitShootLength</a>
+ <li id="LeafPH">
+<a href='#'>LeafPH</a>
+ <li id="LeafPalatability">
+<a href='#'>LeafPalatability</a>
+ <li id="LeafPhenology">
+<a href='#'>LeafPhenology</a>
+ <li id="LeafPhosphorusConcentration_Area">
+<a href='#'>LeafPhosphorusConcentration_Area</a>
+ <li id="LeafPhosphorusConcentration_Mass">
+<a href='#'>LeafPhosphorusConcentration_Mass</a>
+ <li id="LeafPuncturability">
+<a href='#'>LeafPuncturability</a>
+ <li id="LeafResistanceToFracture">
+<a href='#'>LeafResistanceToFracture</a>
+ <li id="LeafRespirationAt25oC_Mass">
+<a href='#'>LeafRespirationAt25oC_Mass</a>
+ <li id="LeafRespirationAtGivenTemperature_Area">
+<a href='#'>LeafRespirationAtGivenTemperature_Area</a>
+ <li id="LeafRespirationAtGrowthTemperature_Mass">
+<a href='#'>LeafRespirationAtGrowthTemperature_Mass</a>
+ <li id="LeafRespirationRate_Area">
+<a href='#'>LeafRespirationRate_Area</a>
+ <li id="LeafRespirationRate_Mass">
+<a href='#'>LeafRespirationRate_Mass</a>
+ <li id="LeafSclerophylly">
+<a href='#'>LeafSclerophylly</a>
+ <li id="LeafTensileStrength">
+<a href='#'>LeafTensileStrength</a>
+ <li id="LeafVascularBundlCellSizeSclerenchymaArea">
+<a href='#'>LeafVascularBundlCellSizeSclerenchymaArea</a>
+ <li id="LeafVascularBundleCellSizePhloemArea">
+<a href='#'>LeafVascularBundleCellSizePhloemArea</a>
+ <li id="LeafVascularBundleCellSizeXylemArea">
+<a href='#'>LeafVascularBundleCellSizeXylemArea</a>
+ <li id="LeafWaterPotential">
+<a href='#'>LeafWaterPotential</a>
+ <li id="LeafletArea">
+<a href='#'>LeafletArea</a>
+ <li id="LeafletLength">
+<a href='#'>LeafletLength</a>
+ <li id="LeafletWidth">
+<a href='#'>LeafletWidth</a>
+ <li id="LitterPotentialDecompostionRate">
+<a href='#'>LitterPotentialDecompostionRate</a>
+ <li id="Mean">
+<a href='#'>Mean</a>
+ <li id="PlantBranchingArchitecture">
+<a href='#'>PlantBranchingArchitecture</a>
+ <li id="PlantClonality">
+<a href='#'>PlantClonality</a>
+ <li id="PlantDispersalSyndrom">
+<a href='#'>PlantDispersalSyndrom</a>
+ <li id="PlantFlammability">
+<a href='#'>PlantFlammability</a>
+ <li id="PlantGrowthForm">
+<a href='#'>PlantGrowthForm</a>
+ <li id="PlantHeightAt20years">
+<a href='#'>PlantHeightAt20years</a>
+ <li id="PlantHeightAtInfolerescenceTop">
+<a href='#'>PlantHeightAtInfolerescenceTop</a>
+ <li id="PlantHeightObserved">
+<a href='#'>PlantHeightObserved</a>
+ <li id="PlantLifeForm">
+<a href='#'>PlantLifeForm</a>
+ <li id="PlantLifeHistory">
+<a href='#'>PlantLifeHistory</a>
+ <li id="PlantLifespan">
+<a href='#'>PlantLifespan</a>
+ <li id="PlantMaxHeightObservedByFlower">
+<a href='#'>PlantMaxHeightObservedByFlower</a>
+ <li id="PlantMaxHeightObservedByLeaf">
+<a href='#'>PlantMaxHeightObservedByLeaf</a>
+ <li id="PlantMaximumHeight">
+<a href='#'>PlantMaximumHeight</a>
+ <li id="PlantMaximumLongevity">
+<a href='#'>PlantMaximumLongevity</a>
+ <li id="PlantMultiStemness">
+<a href='#'>PlantMultiStemness</a>
+ <li id="PlantMycorrhizalType">
+<a href='#'>PlantMycorrhizalType</a>
+ <li id="PlantNitrogenFixationCapacity">
+<a href='#'>PlantNitrogenFixationCapacity</a>
+ <li id="PlantNutrientUptakeStrategy">
+<a href='#'>PlantNutrientUptakeStrategy</a>
+ <li id="PlantPhotosyntheticPathway">
+<a href='#'>PlantPhotosyntheticPathway</a>
+ <li id="PlantPhotosyntheticRate_Area">
+<a href='#'>PlantPhotosyntheticRate_Area</a>
+ <li id="PlantPhotosyntheticRate_DryMass">
+<a href='#'>PlantPhotosyntheticRate_DryMass</a>
+ <li id="PlantPollinationSyndrom">
+<a href='#'>PlantPollinationSyndrom</a>
+ <li id="PlantRegenerationAfterFire">
+<a href='#'>PlantRegenerationAfterFire</a>
+ <li id="PlantReleasingHeight">
+<a href='#'>PlantReleasingHeight</a>
+ <li id="PlantReproductiveHeight">
+<a href='#'>PlantReproductiveHeight</a>
+ <li id="PlantResproutingCapacityAfterClipping">
+<a href='#'>PlantResproutingCapacityAfterClipping</a>
+ <li id="PlantResproutingCapacityAfterDisturbance">
+<a href='#'>PlantResproutingCapacityAfterDisturbance</a>
+ <li id="PlantResproutingCapacityAfterFire">
+<a href='#'>PlantResproutingCapacityAfterFire</a>
+ <li id="PlantSpinescence">
+<a href='#'>PlantSpinescence</a>
+ <li id="PlantToleranceToDrought">
+<a href='#'>PlantToleranceToDrought</a>
+ <li id="PlantToleranceToFrost">
+<a href='#'>PlantToleranceToFrost</a>
+ <li id="PlantToleranceToHighTemperatures">
+<a href='#'>PlantToleranceToHighTemperatures</a>
+ <li id="PlantToleranceToShade">
+<a href='#'>PlantToleranceToShade</a>
+ <li id="PlantToleranceToWindthrow">
+<a href='#'>PlantToleranceToWindthrow</a>
+ <li id="PlantTotalNitgroenConcentration_Mass">
+<a href='#'>PlantTotalNitgroenConcentration_Mass</a>
+ <li id="PlantTypicalHeight">
+<a href='#'>PlantTypicalHeight</a>
+ <li id="RootCambiumFrostHardiness">
+<a href='#'>RootCambiumFrostHardiness</a>
+ <li id="RootDepthDistribution">
+<a href='#'>RootDepthDistribution</a>
+ <li id="RootDiameter">
+<a href='#'>RootDiameter</a>
+ <li id="RootFrostHardiness">
+<a href='#'>RootFrostHardiness</a>
+ <li id="RootMaintenanceRespirationAtGivenTemperature_Mass">
+<a href='#'>RootMaintenanceRespirationAtGivenTemperature_Mass</a>
+ <li id="RootMetamorphosis">
+<a href='#'>RootMetamorphosis</a>
+ <li id="RootNitrogenConcentration_Mass">
+<a href='#'>RootNitrogenConcentration_Mass</a>
+ <li id="RootRespirationAtGivenTemperature_Area">
+<a href='#'>RootRespirationAtGivenTemperature_Area</a>
+ <li id="RootRespirationAtGivenTemperature_Mass">
+<a href='#'>RootRespirationAtGivenTemperature_Mass</a>
+ <li id="RootShootRatio">
+<a href='#'>RootShootRatio</a>
+ <li id="RootTissueDensity">
+<a href='#'>RootTissueDensity</a>
+ <li id="RootVulnerabilityTo">
+<a href='#'>RootVulnerabilityTo</a>
+ <li id="RootingDepth">
+<a href='#'>RootingDepth</a>
+ <li id="SeedDryMass">
+<a href='#'>SeedDryMass</a>
+ <li id="SeedGerminationSimulation">
+<a href='#'>SeedGerminationSimulation</a>
+ <li id="SeedGerminationSimulationByDigestion">
+<a href='#'>SeedGerminationSimulationByDigestion</a>
+ <li id="SeedHeight">
+<a href='#'>SeedHeight</a>
+ <li id="SeedLength">
+<a href='#'>SeedLength</a>
+ <li id="SeedLongevity">
+<a href='#'>SeedLongevity</a>
+ <li id="SeedMass">
+<a href='#'>SeedMass</a>
+ <li id="SeedShape">
+<a href='#'>SeedShape</a>
+ <li id="SeedWidth">
+<a href='#'>SeedWidth</a>
+ <li id="SeedlingFrostHardiness">
+<a href='#'>SeedlingFrostHardiness</a>
+ <li id="SeedlingFunctionalMorphology">
+<a href='#'>SeedlingFunctionalMorphology</a>
+ <li id="ShootCambiumFrostHardiness">
+<a href='#'>ShootCambiumFrostHardiness</a>
+ <li id="ShootFrostHardiness">
+<a href='#'>ShootFrostHardiness</a>
+ <li id="ShootVulnerabilityTo">
+<a href='#'>ShootVulnerabilityTo</a>
+ <li id="SpecificLeafArea">
+<a href='#'>SpecificLeafArea</a>
+ <li id="SpecificRootLength">
+<a href='#'>SpecificRootLength</a>
+ <li id="SpecificXylemHydraulicConductivity">
+<a href='#'>SpecificXylemHydraulicConductivity</a>
+ <li id="StemDiameterAtDBH">
+<a href='#'>StemDiameterAtDBH</a>
+ <li id="StemFrostHardiness">
+<a href='#'>StemFrostHardiness</a>
+ <li id="StemGrowingRespirationAtGivenTemperature_Area">
+<a href='#'>StemGrowingRespirationAtGivenTemperature_Area</a>
+ <li id="StemGrowingRespirationAtGivenTemperature_Mass">
+<a href='#'>StemGrowingRespirationAtGivenTemperature_Mass</a>
+ <li id="StemGrowingRespirationAtGivenTemperature_Nitrogen">
+<a href='#'>StemGrowingRespirationAtGivenTemperature_Nitrogen</a>
+ <li id="StemMaintenanceRespirationAtGivenTemperature_Area">
+<a href='#'>StemMaintenanceRespirationAtGivenTemperature_Area</a>
+ <li id="StemMaintenanceRespirationAtGivenTemperature_Mass">
+<a href='#'>StemMaintenanceRespirationAtGivenTemperature_Mass</a>
+ <li id="StemMaintenanceRespirationAtGivenTemperature_Nitrogen">
+<a href='#'>StemMaintenanceRespirationAtGivenTemperature_Nitrogen</a>
+ <li id="StemNitrogenConcentration_Mass">
+<a href='#'>StemNitrogenConcentration_Mass</a>
+ <li id="StemWoodCarbonConcentration_Mass">
+<a href='#'>StemWoodCarbonConcentration_Mass</a>
+ <li id="StemWoodiness">
+<a href='#'>StemWoodiness</a>
+ <li id="TwigDryMatterContent">
+<a href='#'>TwigDryMatterContent</a>
+ <li id="TwigFrostHardiness">
+<a href='#'>TwigFrostHardiness</a>
+ <li id="VcmaxAt25oC_Area">
+<a href='#'>VcmaxAt25oC_Area</a>
+ <li id="VcmaxAt25oC_Mass">
+<a href='#'>VcmaxAt25oC_Mass</a>
+ <li id="VcmaxAtAmbientTemperature_Area">
+<a href='#'>VcmaxAtAmbientTemperature_Area</a>
+ <li id="VcmaxAtAmbientTemperature_Mass">
+<a href='#'>VcmaxAtAmbientTemperature_Mass</a>
+ <li id="WoodDensity">
+<a href='#'>WoodDensity</a>
+ <li id="WoodNitrogenConcentration_Mass">
+<a href='#'>WoodNitrogenConcentration_Mass</a>
+ <li id="WoodPhosphorusConcentration_Mass">
+<a href='#'>WoodPhosphorusConcentration_Mass</a>
+ <li id="WoodSpecificGravity">
+<a href='#'>WoodSpecificGravity</a>
+</ul>
+</li>
+<li id="Relevant_Traits">
+ <a href='#'>Relevant_Traits</a>
+</li>
+</ul>
+</div>
+
+</div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,485 @@
+<!DOCTYPE html
+PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>TraitNet Data Registry</title>
+	
+	<script type="text/javascript" src="../_lib/jquery.js"></script>
+	<script type="text/javascript" src="../jquery.jstree.js"></script>
+	<script type="text/javascript" src="../_lib/jquery.cookie.js"></script>
+	<script type="text/javascript" src="../_lib/jquery.hotkeys.js"></script>
+	<script type="text/javascript" src="../_lib/jquery.ui.js"></script>
+	<script type="text/javascript" src="../_lib/jquery.widget.js"></script>
+	<script type="text/javascript" src="../_lib/jquery.position.js"></script>
+	<script type="text/javascript" src="../_lib/jquery.tooltip.js"></script>
+	
+	<link type="text/css" rel="stylesheet" href="../themes/default/style.css" />
+	<!--<link type="text/css" rel="stylesheet" href="./knbtable.css"/>-->
+	<link type="text/css" rel="stylesheet" href="./mihir.css"/>
+	<link type="text/css" rel="stylesheet" href="../_docs/syntax/!style.css"/>
+	<link type="text/css" rel="stylesheet" href="../_docs/!style.css"/>
+    <link type="text/css" rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.5/themes/start/jquery-ui.css" />
+	
+	<script type="text/javascript" src="../_docs/syntax/!script.js"></script>
+	<script type="text/javascript" src="search.js"></script> 
+	<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.5/jquery-ui.min.js"></script>
+</head>
+
+<body>
+
+<style type="text/css">
+<!--.jstree-classic .jstree-open > a .jstree-icon { background-position:-56px -19px; }-->
+.jstree a {
+	color : #C1F0F6;
+}
+.checkboxes {
+	height: 50px;
+	color: white;
+}
+.partof > li > a > ins { background-position:-56px -37px !important; }
+.searchbox > button.right {
+	float: right;
+	margin: 0 0.25em;
+}
+.error {
+	text-align: center;
+	font-size: 1.2em;
+}
+.error_result {
+	font-weight: bold;
+	color: #C8FE2E;
+}
+</style>
+
+<script type="text/javascript">
+// Note method 2) and 3) use `one`, this is because if `refresh` is called those events are triggered
+var entity = "", charac = "", name = "";
+var currEntity, currCharacteristic, traitsJson = {};
+$(document).ready(function() {
+
+	$("#inter_jstree").jstree({ "plugins" : ["themes","html_data","ui","crrm"], "themes" : { "theme" : "classic" } }).bind("select_node.jstree", function (event, data) {
+            $("#traits_jstree").jstree("deselect_all");
+			$("#traits_jstree").jstree("close_all");
+			}).bind("open_node.jstree", function (event, data) {
+			$("#traits_jstree").jstree("deselect_all");
+			$("#traits_jstree").jstree("close_all");
+			});
+	
+	$.getJSON("ontfiles/entities.json", function(data) {
+			
+            $("#selectByEntity").append(jsonToHTML(data));
+			$("#ent_jstree").jstree({ "plugins" : ["themes","html_data","ui", "core"], "themes" : { "theme" : "default" } }).bind("select_node.jstree", function (event, data) {
+            // `data.rslt.obj` is the jquery extended node that was clicked
+				currEntity = data.rslt.obj;
+				entity = data.rslt.obj.children("a").text().trim().replace(/ /g, "");
+				
+			$("#traits_jstree").jstree("deselect_all");
+			$("#traits_jstree").jstree("close_all");
+   			relTraits();
+			populateTraits();
+			}).bind("open_node.jstree", function (event, data) {
+			$("#traits_jstree").jstree("deselect_all");
+			$("#traits_jstree").jstree("close_all");
+			});
+		// 1) the loaded event fires as soon as data is parsed and inserted
+	});
+
+    $.getJSON("ontfiles/characteristics.json", function(data) {
+            
+            $("#selectByCharacteristic").append(jsonToHTML(data));
+			$("#char_jstree").jstree({ "plugins" : ["themes","html_data","ui", "core"], "themes" : { "theme" : "classic" }  }).bind("select_node.jstree", function (event, data) {
+				currCharacteristic = data.rslt.obj;
+            // `data.rslt.obj` is the jquery extended node that was clicked
+				charac = data.rslt.obj.children("a").text().trim().replace(/ /g, "");
+			
+			$("#traits_jstree").jstree("deselect_all");
+			$("#traits_jstree").jstree("close_all");
+   			relTraits();
+			populateTraits();
+			}).bind("open_node.jstree", function (event, data) {
+			$("#traits_jstree").jstree("deselect_all");
+			$("#traits_jstree").jstree("close_all");
+			});
+    });
+		// 1) the loaded event fires as soon as data is parsed and inserted
+	
+	
+    $.getJSON("ontfiles/traits.json", function(data) {
+            
+			traitsJson = data;
+            $("#selectByTrait").append(traitJsonToHTML(data));
+			$("#traits_jstree").jstree({ "plugins" : ["themes", "core", "html_data","ui","crrm"], "themes" : { "theme" : "classic" } }).bind("select_node.jstree", function (event, data) {
+			name = data.rslt.obj.children("a").text().trim().replace(/ /g, "");
+			
+			if(name != "SelectByTrait") {
+			//$("#label").val("Search for " + name);
+				$("#searchBox").find('span').text('Search for ' + name);
+			}
+			else
+				$("#traits_jstree").jstree("deselect_all");
+			
+			$("#inter_jstree").jstree("deselect_all");
+			$("#inter_jstree").jstree("close_all");
+			$("#ent_jstree").jstree("deselect_all");
+			$("#char_jstree").jstree("close_all");
+			$("#ent_jstree").jstree("deselect_all");
+			$("#char_jstree").jstree("close_all");
+		
+		}).bind("open_node.jstree", function(event, data) {
+			$("#inter_jstree").jstree("deselect_all");
+			$("#inter_jstree").jstree("close_all");
+			$("#ent_jstree").jstree("deselect_all");
+			$("#char_jstree").jstree("deselect_all");
+			$("#ent_jstree").jstree("close_all");
+			$("#char_jstree").jstree("close_all");
+		});
+		// 1) the loaded event fires as soon as data is parsed and inserted
+		
+    });
+		// 1) the loaded event fires as soon as data is parsed and inserted
+	
+	$("#searchBox").click(function() {
+		
+		var breakFlag = false; 
+		reset();
+		$("#result").html("Loading");
+		
+		(function() {
+			
+			if(breakFlag)
+				return;
+		
+			if( $("#result").html().length >= 10 ) 
+				$("#result").html("Loading");
+				
+			setTimeout(arguments.callee, 1000);
+			$("#result").append(".");
+			
+		})();
+		
+		$.post("search.php", {
+			"searchTerm" : name
+		}, function(d) {
+			breakFlag = true;
+			$("#result").html(d);
+		});
+		return false;
+	});
+	
+	$("#searchBox").button();
+	$("#about").button();
+	$("#tutorial").button();
+	$("#reset").button();
+	$("#main").tooltip();
+});
+String.prototype.fromCamel = function(){
+	return this.replace(/([A-Z])/g, " $1");
+};
+ function relTraits() {
+		// exact match
+		var exact = $("<ul />");
+		for( i in traitsJson ){
+			if( !traitsJson.hasOwnProperty(i) ) continue;
+			var eI = traitsJson[i]["entities"].indexOf(entity),
+				cI = traitsJson[i]["characteristics"].indexOf(charac);
+			if((charac != "" && cI == -1) || (entity != "" && eI == -1)) continue;
+			exact.append($("<li />").html($("<a />").html(i.fromCamel()).attr("title", traitsJson[i]["comment"])));
+		}
+
+		$("#exact").html(wrap(exact, "Exact Match Traits"));
+		
+		$("#inter_jstree").jstree({ "plugins" : ["themes", "core", "html_data","ui","crrm"], "themes" : { "theme" : "classic" } }).bind("select_node.jstree", function (event, data) {
+		name = data.rslt.obj.children("a").text().trim().replace(/ /g, "");
+		
+		if(name != "TraitsFound" && name != "ExactMatchTraits") {
+		//$("#label").val("Search for " + name);
+			$("#searchBox").find('span').text('Search for ' + name);
+		}
+		else
+			$("#inter_jstree").jstree("deselect_all");
+		
+		$("#traits_jstree").jstree("deselect_all");
+		$("#traits_jstree").jstree("close_all");
+		
+		}).bind("open_node.jstree", function(event,data) {
+			$("#traits_jstree").jstree("deselect_all");
+			$("#traits_jstree").jstree("close_all");
+		
+		}).bind("loaded.jstree", function (event, data) {
+			$("#inter_jstree").jstree("open_all");
+		});
+	};
+   function jsonToHTML(j){
+        var result = $("<ul />");
+        if( j['partof'] == "true" ){
+          result.addClass("partof");
+          delete j['partof'];
+        }
+
+        for( i in j ){
+          if( !j.hasOwnProperty(i) ) continue;
+          var item = $("<li />");
+          if( typeof j[i] == "object" ) {
+            if(j[i]['comment']) {
+              var comment = j[i]['comment'].substring(0);
+			  delete j[i]['comment'];
+			  }
+            else
+              comment = '';
+
+            item.html($("<a />").attr("href", "#").attr("title", comment).html(i.replace(/([A-Z])/g, " $1"))).append(arguments.callee.call(this, j[i]));
+          } else {
+            item.html($("<a />").attr("href", "#").attr("title", j[i]).html(i.replace(/([A-Z])/g, " $1")));
+          }
+          result.append(item);
+        }
+        return result;
+    };
+	
+   function traitJsonToHTML(j) {
+        var result = $("<ul />");
+		for( i in j ) {
+		
+          if( !j.hasOwnProperty(i) ) continue;
+          var item = $("<li />");
+          var comment = j[i]['comment'].substring(0);
+			
+            item.html($("<a />").attr("href", "#").attr("title", comment).html(i.replace(/([A-Z])/g, " $1")));
+          
+		  result.append(item);
+        }
+        return result;
+    };
+function displayMessage() {
+	$("#message").dialog({ width: 800, height: 500, modal:true});
+};
+function displayTutorial() {
+	$("#tutorialMessage").dialog({ width: 800, height: 500, modal:true});
+};
+function reset() {
+	$("#traits_jstree").jstree("close_all");
+	$("#char_jstree").jstree("close_all");
+	$("#ent_jstree").jstree("close_all");
+	$("#inter_jstree").jstree("close_all");
+	
+	$("#traits_jstree").jstree("deselect_all");
+	$("#char_jstree").jstree("deselect_all");
+	$("#ent_jstree").jstree("deselect_all");
+	$("#inter_jstree").jstree("deselect_all");
+	
+	$("#searchBox").find('span').text('Search');
+	entity = "";
+	charac = ""; 
+	name = "";
+	
+	$("#result").empty();
+	};
+function jsonToHTML(j){
+        var result = $("<ul />");
+        if( j['partof'] == "true" ){
+          result.addClass("partof");
+          delete j['partof'];
+        }
+
+        for( i in j ){
+          if( !j.hasOwnProperty(i) ) continue;
+          var item = $("<li />");
+          if( typeof j[i] == "object" ) {
+              var comment = j[i]['comment'].substring(0);
+			  delete j[i]['comment'];
+            item.html($("<a />").attr("href", "#").attr("title", comment).html(i.replace(/([A-Z])/g, " $1"))).append(arguments.callee.call(this, j[i]));
+          } else {
+            item.html($("<a />").attr("href", "#").attr("title", j[i]).html(i.replace(/([A-Z])/g, " $1")));
+          }
+          result.append(item);
+        }
+        return result;
+    };
+	function populateTraits(){
+	
+		var currEntityText = entity;
+		var currCharacText = charac;
+
+		var result = $("#recur"),
+			manyToMany = $("<ul />");
+
+		if( currEntityText != "" && $("#option1").is(":checked") ) {
+			iterateChildren(currEntity.children("ul"), function(name, ele, result){
+				if( !$(ele).parent("ul").hasClass("partof") )
+					pushValidTraits(name, "SelectByCharacteristic", result);
+				return false;
+			}, manyToMany);
+		}
+		
+		if( currEntityText != "" && $("#option2").is(":checked") ) {
+			iterateChildren(currEntity.children("ul"), function(name, ele, result){
+				if($(ele).parent("ul").hasClass("partof"))
+					pushValidTraits(name, "SelectByCharacteristic", result);
+				return false;
+			}, manyToMany);
+		}
+		
+		if( currCharacText != "" && $("#option3").is(":checked") ) {
+			iterateChildren(currCharacteristic.children("ul"), function(name, ele, result){
+				pushValidTraits("SelectByEntity", name, result);
+			}, manyToMany);
+		}
+		result.html(wrap(manyToMany, "Recursively Matched Traits"));
+		$("#inter_jstree").jstree({ "plugins" : ["themes", "core", "html_data","ui","crrm"], "themes" : { "theme" : "classic" } }).bind("select_node.jstree", function (event, data) {
+			name = data.rslt.obj.children("a").text().trim().replace(/ /g, "");
+			
+			if(name != "TraitsFound" && name != "ExactlyMatchedTraits" && name!= "RecursivelyMatchedTraits") {
+			
+			//$("#label").val("Search for " + name);
+				$("#searchBox").find('span').text('Search for ' + name);
+			}
+			else
+				$("#inter_jstree").jstree("deselect_all");
+			
+			$("#traits_jstree").jstree("deselect_all");
+			$("#traits_jstree").jstree("close_all");
+			
+			}).bind("open_node.jstree", function(event,data) {
+				$("#traits_jstree").jstree("deselect_all");
+				$("#traits_jstree").jstree("close_all");
+			
+			}).bind("loaded.jstree", function (event, data) {
+				$("#inter_jstree").jstree("open_all");
+			});
+	}		
+	function wrap(obj, str){
+		return $("<a />").html(str).after(obj.children().length > 0 ? obj : "");
+	}
+	function pushValidTraits(eKey, cKey, ele) {
+		for( i in traitsJson ){
+			if( !traitsJson.hasOwnProperty(i) ) continue;
+			var eI = traitsJson[i]["entities"].indexOf(eKey),
+				cI = traitsJson[i]["characteristics"].indexOf(cKey);
+			if( (eKey != "SelectByEntity" && eI == -1) || (cKey != "SelectByCharacteristic" && cI == -1) ) continue;
+			ele.append($("<li />").html($("<a />").html(i.fromCamel()).attr("title", traitsJson[i]["comment"])));
+		}
+	}
+	function iterateChildren(root, fn, ele){
+		root.children("li").each(function(i, e){
+			var ee = $(e).children("a").text().trim().replace(/ /g, "");
+			iterateChildren.call(this, $(e).children("ul"), fn, ele);
+			fn(ee, e, ele);
+		});
+	}
+</script>
+
+<div id="message" title="About" style="display:none">
+<h2>Motivation</h2>
+<p>Discovering trait data resources is a time consuming and daunting task. <a style="text-decoration:underline; color:#2E4A9D; font-weight:bold;" href="http://traitnet.ecoinformatics.org/">TraitNet</a> is an NSF-funded Research Coordination Network whose goal is to facilitate trait-based research by fostering the curation, discovery, and sharing of trait data. As a first step towards the goal of an integrated system that will allow for cradle-to-eternity data curation, TraitNet has developed this Registry for Plant Functional Trait Data. The goals of the TraitNet Data Registry are to enable the discovery of plant trait data and help link data owners with potential collaborators and data consumers.</p>
+
+<h2>Goal</h2>
+<p>The TraitNet Data Registry allows data consumers to search for data sources via an interface that leverages the Plant Trait Ontology (PLATON), developed in collaboration with CEFE (Montpellier, France) and NCEAS (Santa Barbara, USA). The foundation of PLATON is NCEAS Extensible Observation Ontology (OBOE). OBOE decomposes traits into entities (e.g., leaves, shoot, wood) upon which characteristics (e.g., height, weight, tolerance to drought) are measured. This approach enables a user to search for traits via entity, characteristic, or both, or via the traits themselves. Entities are organized hierarchically within a plant partonomy using the relations isPartOf (e.g., leaf isPartOf branch, which isPartOf shoot) and isA (e.g., stemwood isA wood). Characteristics can be searched via a class/subclass hierarchy via isA (e.g., maintenance_respiration isA respiration_characteristic). Searches on entities and characteristics can be combined, or a combination of an entity and a characteristic (e.g., leaf maintenance respiration).<p> 
+
+<h2>Who are we?</h2>
+<p>Mihir Sanghavi (Email: ms478 at njit dot edu), NJIT, Newark, has developed this TraitNet Data Registry under the guidance of Farshid Ahrestani, Columbia University, New York, and Daniel E. Bunker, NJIT, Newark. This project would not have been possible without the insight, guidance and technical input of the following people: Shahid Naeem, Mark Schildhauer, Ben Leinfelder, and Shawn Bowers. The National Science Foundation (grant #0639161) supports TraitNet.</p> 
+
+<h2>What can you do?</h2>
+<p>Data owners who wish to share their data can register their data sets by completing the  TraitNet Data Registry <a style="text-decoration:underline; color:#2E4A9D; font-weight:bold;" href = "http://traitnet.ecoinformatics.org/about/registry/TraitNet_Registry_Metadata_Form_1a.pdf">Metadata Form</a> and emailing it to traitnet [at] gmail [dot] com. Registering your dataset does not require making your dataset freely available. Searches that lead to your dataset will disclose the contact information you provide for the dataset, allowing data consumers to contact you to propose collaboration or request the use of your data. You are, however, under no obligation to do so. We hope you will join us in our effort to facilitate data discovery, re-use, and collaboration. The usefulness of the Registry is positively related to the number of datasets included in the Registry.</p> 
+
+<p><u><a style="text-decoration:underline; color:#2E4A9D; font-weight:bold;" href="mailto:traitnet@gmail.com">Contact TraitNet</a></u></p>
+</div>
+
+<div id="tutorialMessage" title="Tutorial" style="display:none">
+<p>Lorem ipsum dolor si amet</p>
+</div>
+
+
+<div id="main" style= "width:1080px; margin:auto">
+	<div style="display: block; color: white; text-align: center; font-size: 48px;">TraitNet Data Registry</div>
+	<div style="display: block; color: #C8FE2E; text-align: center; font-size: 28px;">Leveraging ontologies for smart data discovery</div>
+	<p></p>
+	<div>
+	<center><img style="margin:auto; text-align:center;" src="logo.jpg" alt="Traitnet Logo" height="100" width="303"/></center>
+	<hr>
+	</hr>
+	</div>
+	<div class="searchbox">
+	<button id ="about" onclick="displayMessage()">About</button>
+	<button id ="tutorial" onclick="displayTutorial()">Tutorial</button>
+	<button id="reset" onclick="reset()" class="right">Reset</button>
+	<button id="searchBox" class="right">Search</button>	
+	</div>
+	
+	<div id="entities" style="float:left; margin: 1% 1% 1% 2%;">
+	<div class="checkboxes">
+	<input type="checkbox" id="option1" />
+	<label>Include all sub-classes in selection</label><br />
+    <input type="checkbox" id="option2" />
+	<label>Include all sub-parts in selection</label>
+	</div>
+	<div id="ent_jstree">
+	<ul>
+	<li id="selectByEntity">
+	 <a href='#'>Select By Entity</a>
+	</li>
+	</ul>
+	</div>
+	</div>
+
+
+	<div id="characteristics" style="float:left; margin: 1% 1% 1% 2%">
+	<div class="checkboxes">
+	<input type="checkbox" id="option3" />
+	<label>Include all sub-classes in selection</label><br />
+	</div>
+	<div id="char_jstree">
+	<ul><li id="selectByCharacteristic">
+	 <a href='#'>Select By Characteristic</a>
+	 </li>
+	</ul>
+	</div>
+	</div>
+	
+	<div id="inter" style="float:left; margin:  1% 1% 1% 2%;">
+	
+	<div class="checkboxes"></div>
+	<div id="inter_jstree">
+	<ul>
+	<li id="traitsFound">
+	 <a href='#'>Traits Found</a>
+	 <ul>
+	 <li id="exact">
+	 <a href='#'>Exactly Matched Traits</a>
+	 </li>
+	 <li id="recur">
+	 <a href='#'>Recursively Matched Traits</a>
+	 </li>
+	 </ul>
+	</li> 
+	 </ul>
+	</div>
+	</div>
+	
+	<!--<div style="clear:both; color:white; font-size:200%;">
+	<div class="checkboxes"></div>
+	OR
+	</div>-->
+
+	<div id="traits" style="clear:both; margin: 1% 1% 1% 2%;">
+	
+	<div class="checkboxes"></div>
+	<div id="traits_jstree">
+	<ul> 
+	<li id="selectByTrait">
+	 <a href='#'>Select By Trait</a>
+	</li>
+	</ul>
+	</div>
+	</div>
+	
+	<div id = "result" style="clear:both; color:white; font-size:1.2em;">
+	</div>
+	
+</div> <!-- main div -->
+
+</body>
+</html>
